@@ -1,0 +1,314 @@
+.root {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color: #222222;
+}
+
+.textTitle {
+    -fx-font-family: "Segoe UI Light";
+    -fx-fill: #f8f9fa;
+}
+
+.texthref,
+.textTitlehref {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13;
+    -fx-fill: #7E7F80;
+}
+
+.texthref:hover {
+    -fx-fill: #f8f9fa;
+    -fx-cursor: hand;
+}
+
+.label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #f8f9fa;
+}
+
+.text-field,
+.password-field {
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #f8f9fa;
+}
+
+/****************************************************************
+  Dialog Skin
+****************************************************************/
+.jfx-dialog-layout {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color: #2e3136;
+}
+
+/****************************************************************
+  Button Skin
+****************************************************************/
+.customButton {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-padding: 3 20 3 20;
+    -fx-border-color: #222222;
+    -fx-border-width: 3;
+    -fx-background-radius: 0;
+    -fx-background-color: #2e3136;
+    -fx-text-fill: #f8f9fa;
+    -fx-cursor: hand;
+}
+
+.panelButton {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-radius: 0;
+    -fx-background-color: #2e3136;
+    -fx-text-fill: #f8f9fa;
+    -fx-cursor: hand;
+}
+
+.selectedPanelButton {
+    -fx-background-color: #2a4b8d, #2e3136;
+    -fx-background-insets: 0, 0 5 0 0;
+}
+
+.headerButton:disabled {
+    -fx-font-size: 25;
+    -fx-opacity: 1.0;
+    -fx-background-color: #27292d;
+    -fx-cursor: default;
+}
+
+.primaryButton:hover {
+    -fx-background-color: #2a4b8d;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.dangerButton:hover {
+    -fx-background-color: #8d2a35;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.warningButton:hover {
+    -fx-background-color: #918f0d;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.reportButton:hover {
+    -fx-background-color: #43464a;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.jfx-toggle-button {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #f8f9fa;
+    -jfx-toggle-color: #2a4b8d;
+    -jfx-untoggle-color: #2e3136;
+    -jfx-toggle-line-color: #556FA4;
+    -jfx-untoggle-line-color: #585A5E;
+    -jfx-disable-visual-focus: true;
+}
+
+/****************************************************************
+  TableView Skin
+****************************************************************/
+.table-view {
+    -fx-base: #27292d;
+    -fx-control-inner-background: #27292d;
+    -fx-background-color: #27292d;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+        transparent transparent derive(-fx-base, 80%) transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 15;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: #2a4b8d;
+    -fx-table-cell-border-color: transparent;
+}
+
+/****************************************************************
+  ScrollBar Skin
+****************************************************************/
+.scroll-bar {
+    -fx-background-color: rgb(96, 96, 96);
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:vertical .track-background,
+.scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: rgb(211, 211, 211);
+    -fx-background-insets: 4 0 4 0;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgb(211, 211, 211);
+    -fx-background-insets: 0 4 0 4;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgb(231, 231, 231);
+}
+
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: rgb(255, 255, 255);
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+    -fx-padding: 5;
+}
+
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+    -fx-padding: 5;
+}
+
+.scroll-bar:horizontal .increment-arrow {
+    -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+    -fx-background-color: rgb(211, 211, 211);
+    -fx-padding: 0.25em;
+    -fx-rotate: -90;
+}
+
+.scroll-bar:vertical .increment-arrow {
+    -fx-background-color: rgb(211, 211, 211);
+    -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+    -fx-padding: 0.25em;
+    -fx-rotate: 0;
+}
+
+.scroll-bar:horizontal .decrement-arrow {
+    -fx-background-color: rgb(211, 211, 211);
+    -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+    -fx-padding: 0.25em;
+    -fx-rotate: 90;
+}
+
+.scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: rgb(211, 211, 211);
+    -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+    -fx-padding: 0.25em;
+    -fx-rotate: -180;
+}
+
+.scroll-bar:vertical:focused,
+.scroll-bar:horizontal:focused {
+    -fx-background-color: transparent, rgb(96, 96, 96), rgb(96, 96, 96);
+}
+
+/****************************************************************
+  Spinner Skin
+****************************************************************/
+.spinner {
+    -fx-font-family: "Segoe UI Light";
+    -fx-prompt-text-fill: #43464a;
+    -fx-text-fill: #f8f9fa;
+    -fx-background-color: none;
+    -fx-padding: 0 0 3 0;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.spinner .increment-arrow-button .increment-arrow,
+.spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: #007cff;
+}
+
+.spinner .text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #bdbdbd;
+}
+
+/****************************************************************
+  ComboBox Skin
+****************************************************************/
+.combo-box .list-cell:filled:selected .text,
+.choice-box .list-cell:filled:selected .text {
+    -fx-fill: #f8f9fa;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #222222;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 8, 0.0, 0, 0);
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: #2e3136;
+    -fx-text-fill: #f8f9fa;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: #2a4b8d;
+    -fx-text-fill: #f8f9fa;
+}
+
+.combo-box .arrow,
+.choice-box .arrow {
+    -fx-background-color: #2a4b8d;
+}
+
+/****************************************************************
+  Notification Skin
+****************************************************************/
+.notification-bar>.pane {
+    -fx-background-color: #27292d;
+    -fx-padding: 10 10 10 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 11, 0.0, 0, 3);
+    -fx-background-insets: 0, 1, 2;
+}
+
+.notification-bar>.pane .title {
+    -fx-text-fill: #f8f9fa;
+}
+
+.notification-bar>.pane .label {
+    -fx-text-fill: #f8f9fa;
+    -fx-padding: 5;
+}
+
+.notification-bar>.pane .close-button:hover,
+.notification-bar>.pane .close-button:pressed {
+    -fx-background-color: transparent;
+}
