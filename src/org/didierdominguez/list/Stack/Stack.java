@@ -41,7 +41,7 @@ public class Stack {
 
     public Object getTop() {
         if (!isEmpty()) {
-            return top.getObject();
+            return top;
         }
         return null;
     }

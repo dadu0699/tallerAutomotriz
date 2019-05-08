@@ -68,6 +68,7 @@ public class AdministrativePanel {
         buttonSpareParts.setOnAction(event -> {
             selectButton(buttonSpareParts);
             vBoxPanels.getChildren().clear();
+            vBoxPanels.getChildren().add(ViewSparePart.getInstance().getViewSparePart());
         });
 
         JFXButton buttonServices = new JFXButton("SERVICIOS");
@@ -78,6 +79,7 @@ public class AdministrativePanel {
         buttonServices.setOnAction(event -> {
             selectButton(buttonServices);
             vBoxPanels.getChildren().clear();
+            vBoxPanels.getChildren().add(ViewService.getInstance().getViewService());
         });
 
         JFXButton buttonCustomersCars = new JFXButton("    CLIENTES\nAUTOMOVILES");
@@ -88,6 +90,7 @@ public class AdministrativePanel {
         buttonCustomersCars.setOnAction(event -> {
             selectButton(buttonCustomersCars);
             vBoxPanels.getChildren().clear();
+            vBoxPanels.getChildren().add(ViewCustomer.getInstance().getViewCustomer());
         });
 
         JFXButton buttonProgressCar = new JFXButton("   PROGRESO\nAUTOMOVILES");

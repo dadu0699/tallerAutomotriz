@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="tallerAutomotriz:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/tallerAutomotriz_jar</output-path>
+    <root id="archive" name="tallerAutomotriz.jar">
+      <element id="module-output" name="tallerAutomotriz" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/iText7-Core-7.1.2/barcodes-7.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/iText7-Core-7.1.2/forms-7.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/iText7-Core-7.1.2/io-7.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/iText7-Core-7.1.2/kernel-7.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/iText7-Core-7.1.2/layout-7.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/iText7-Core-7.1.2/pdfa-7.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/iText7-Core-7.1.2/pdftest-7.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/iText7-Core-7.1.2/sign-7.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/iText7-Core-7.1.2/slf4j-api-1.7.25.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/iText7-Core-7.1.2/slf4j-simple-1.7.25.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jfoenix-8.0.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/controlsfx-8.40.14.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

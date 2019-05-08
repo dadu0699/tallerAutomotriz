@@ -316,3 +316,36 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-background-color: #2B2E3AFF;
 }
+
+/****************************************************************
+  Spinner Skin
+****************************************************************/
+.spinner {
+    -fx-font-family: "Segoe UI Light";
+    -fx-prompt-text-fill: #4d4d4d;
+    -fx-text-fill: #4d4d4d;
+    -fx-background-color: none;
+    -fx-padding: 0 0 3 0;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.spinner .increment-arrow-button .increment-arrow,
+.spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: #E91E63;
+}
+
+.spinner .text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #4d4d4d;
+}
+
+.spinner .text-field:focused {
+    -fx-border-color: #E91E63;
+    -fx-border-width: 0 0 2 0;
+    -fx-translate-y: 1px;
+}

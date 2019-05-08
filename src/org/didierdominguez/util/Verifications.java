@@ -13,7 +13,16 @@ public class Verifications {
         return instance;
     }
 
-    public boolean isNumeric(String valor) {
+    public boolean isNumericInteger(String valor) {
+        try {
+            Integer.parseInt(valor);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    public boolean isNumericDouble(String valor) {
         try {
             Double.parseDouble(valor);
             return true;

@@ -23,12 +23,12 @@ public class ControllerUser {
     }
 
     public User createUser(String userName, String password, Boolean role) {
-        if (searchUserName(userName) == null) {
+        if (searchUser(userName) == null) {
             id++;
             User user = new User(id, userName, password, role);
             userList.addLastNode(user);
             System.out.println("User added successfully");
-            return searchUserName(userName);
+            return searchUser(userName);
         } else {
             System.out.println("The username is already used");
         }
@@ -43,7 +43,7 @@ public class ControllerUser {
         User user = searchUser(id);
         update = false;
         if (user != null) {
-            if (searchUserName(userName) == null || user.getUserName().equalsIgnoreCase(userName)) {
+            if (searchUser(userName) == null || user.getUserName().equalsIgnoreCase(userName)) {
                 user.setUserName(userName);
                 user.setPassword(password);
                 user.setRole(role);
@@ -71,17 +71,6 @@ public class ControllerUser {
         }
     }
 
-    public void readNodes() {
-        User user;
-        SimpleNode auxiliaryNode = getUserList().getFirstNode();
-        while (auxiliaryNode != null) {
-            user = (User) auxiliaryNode.getObject();
-            System.out.print(user.getUserName() + " --> ");
-            auxiliaryNode = auxiliaryNode.getNextNode();
-        }
-        System.out.println();
-    }
-
     private User searchUser(Integer id) {
         SimpleNode auxiliaryNode = getUserList().getFirstNode();
         while (auxiliaryNode != null && !((User) auxiliaryNode.getObject()).getId().equals(id)) {
@@ -93,9 +82,22 @@ public class ControllerUser {
         return null;
     }
 
-    public User searchUserName(String userName) {
+    public User searchUser(String userName) {
         SimpleNode auxiliaryNode = getUserList().getFirstNode();
         while (auxiliaryNode != null && !((User) auxiliaryNode.getObject()).getUserName().equalsIgnoreCase(userName)) {
+            auxiliaryNode = auxiliaryNode.getNextNode();
+        }
+        if (auxiliaryNode != null && auxiliaryNode.getObject() != null) {
+            return (User) auxiliaryNode.getObject();
+        }
+        return null;
+    }
+
+    public User searchUser(String userName, String password) {
+        SimpleNode auxiliaryNode = getUserList().getFirstNode();
+        while (auxiliaryNode != null
+                && (!((User) auxiliaryNode.getObject()).getUserName().equalsIgnoreCase(userName)
+                || !((User) auxiliaryNode.getObject()).getPassword().equalsIgnoreCase(password))) {
             auxiliaryNode = auxiliaryNode.getNextNode();
         }
         if (auxiliaryNode != null && auxiliaryNode.getObject() != null) {

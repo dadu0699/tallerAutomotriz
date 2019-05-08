@@ -16,8 +16,6 @@ import org.didierdominguez.controller.ControllerUser;
 import org.didierdominguez.util.ScreenSize;
 import org.didierdominguez.view.administrator.AdministrativePanel;
 
-import java.io.IOException;
-
 public class Login {
     private static Login instance;
 
@@ -65,10 +63,13 @@ public class Login {
         buttonSignIn.setButtonType(JFXButton.ButtonType.FLAT);
         buttonSignIn.setPrefSize(x, y);
         buttonSignIn.setOnAction(event -> {
-            User user = ControllerUser.getInstance().searchUserName(fieldUser.getText().trim().toUpperCase());
+            User user = ControllerUser.getInstance().searchUser(fieldUser.getText().trim().toUpperCase(),
+                    fieldPassword.getText());
             if (user != null) {
-                if (user.getRole() && user.getPassword().equals(fieldPassword.getText())) {
+                if (user.getRole()) {
                     AdministrativePanel.getInstance().showWindow();
+                } else {
+                    System.out.println("Cliente");
                 }
             }
         });

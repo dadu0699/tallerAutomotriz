@@ -34,7 +34,7 @@ public class FileControl {
         if (fileControl != null) {
             System.out.println(fileControl.getAbsolutePath());
         } else {
-            System.out.println("Files is not valid");
+            System.out.println("The file is not valid");
         }
     }
 
@@ -42,14 +42,17 @@ public class FileControl {
         ArrayList<String> arrayList = new ArrayList<>();
         String command;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileControl));
-            while ((command = bufferedReader.readLine()) != null) {
-                System.out.println(command);
-                arrayList.add(command);
+            if (fileControl != null) {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(fileControl));
+                while ((command = bufferedReader.readLine()) != null) {
+                    System.out.println(command);
+                    arrayList.add(command);
+                }
+                return arrayList;
             }
         } catch (IOException ex) {
-            System.out.println("\n Archivo no encontrado");
+            System.out.println("The file was not found");
         }
-        return arrayList;
+        return null;
     }
 }

@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -58,7 +57,6 @@ public class ViewEmployee extends Stage {
             arrayListEmployee.add((Employee) auxiliaryNode.getObject());
             auxiliaryNode = auxiliaryNode.getNextNode();
         }
-
         if (observableList != null) {
             observableList.clear();
         }
@@ -101,13 +99,15 @@ public class ViewEmployee extends Stage {
         buttonFile.setOnAction(event -> {
             FileControl.getInstance().uploadFile("EmployeeFile", "*.tme");
             ArrayList<String> arrayList = FileControl.getInstance().readFile();
-            for (String command: arrayList) {
-                String[] params = command.split("-");
-                boolean userRole = params[1].equals("ADMINISTRADOR");
-                ControllerEmployee.getInstance().createEmployee(params[0], params[1], params[2], params[3], userRole);
+            if (arrayList != null) {
+                for (String command: arrayList) {
+                    String[] params = command.split("-");
+                    boolean userRole = params[1].equals("ADMINISTRADOR");
+                    ControllerEmployee.getInstance().createEmployee(params[0], params[1], params[2], params[3], userRole);
+                }
+                updateTableViewItems();
+                Alert.getInstance().showNotification("EMPLEADOS", "ARCHIVO LEIDO EXITOSAMENTE");
             }
-            updateTableViewItems();
-            Alert.getInstance().showNotification("EMPLEADO", "ARCHIVO LEIDO EXITOSAMENTE");
         });
 
         JFXButton buttonAdd = new JFXButton("AGREGAR");
@@ -143,7 +143,7 @@ public class ViewEmployee extends Stage {
                 restartHBox();
                 ControllerEmployee.getInstance().deleteEmployee(employee.getId());
                 updateTableViewItems();
-                Alert.getInstance().showNotification("EMPLEADO", "EMPLEADO ELIMINADO EXITOSAMENTE");
+                Alert.getInstance().showNotification("EMPLEADOS", "EMPLEADO ELIMINADO EXITOSAMENTE");
             }
         });
 
@@ -161,16 +161,16 @@ public class ViewEmployee extends Stage {
         TableColumn<Employee, String> columnName = new TableColumn<>("NOMBRE");
         columnName.setPrefWidth((3 * x / 4) / 4);
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        TableColumn<Employee, User> columnAddress = new TableColumn<>("USUARIO");
-        columnAddress.setPrefWidth((3 * x / 4) / 4);
-        columnAddress.setCellValueFactory(new PropertyValueFactory<>("user"));
-        TableColumn<Employee, String> columnPhoneNumber = new TableColumn<>("ROLE");
-        columnPhoneNumber.setPrefWidth((3 * x / 4) / 4);
-        columnPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("role"));
+        TableColumn<Employee, User> columnUser = new TableColumn<>("USUARIO");
+        columnUser.setPrefWidth((3 * x / 4) / 4);
+        columnUser.setCellValueFactory(new PropertyValueFactory<>("user"));
+        TableColumn<Employee, String> columnRole = new TableColumn<>("ROLE");
+        columnRole.setPrefWidth((3 * x / 4) / 4);
+        columnRole.setCellValueFactory(new PropertyValueFactory<>("role"));
 
         updateObservableList();
         tableView = new TableView<>(observableList);
-        tableView.getColumns().addAll(columnID, columnName, columnAddress, columnPhoneNumber);
+        tableView.getColumns().addAll(columnID, columnName, columnUser, columnRole);
         tableView.setPrefSize(x, 7 * y / 8);
         tableView.setOnMouseClicked(event -> {
             hBox.getChildren().clear();
@@ -203,7 +203,6 @@ class CreateEmployee {
 
     GridPane getGridPane() {
         GridPane gridPane = new GridPane();
-        RequiredFieldValidator validator = new RequiredFieldValidator();
 
         double x = ScreenSize.getInstance().getX();
         double y = ScreenSize.getInstance().getY();
@@ -222,7 +221,6 @@ class CreateEmployee {
         fieldName.setPromptText("NOMBRE");
         fieldName.setLabelFloat(true);
         fieldName.setPrefWidth(x);
-        fieldName.getValidators().add(validator);
         gridPane.add(fieldName, 0, 6, 2, 1);
 
         String[] options = { "MECÁNICO", "ADMINISTRADOR", "RECEPTOR/PAGADOR" };
@@ -238,7 +236,6 @@ class CreateEmployee {
         fieldUser.setPromptText("USUARIO");
         fieldUser.setLabelFloat(true);
         fieldUser.setPrefWidth(x);
-        fieldUser.getValidators().add(validator);
         gridPane.add(fieldUser, 0, 8, 2, 1);
 
         JFXPasswordField fieldPassword = new JFXPasswordField();
@@ -256,8 +253,8 @@ class CreateEmployee {
                     || fieldUser.getText().length() == 0 || fieldPassword.getText().length() == 0) {
                 Alert.getInstance().showAlert(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                Employee employee = ControllerEmployee.getInstance().searchEmployeeName(fieldName.getText());
-                User user = ControllerUser.getInstance().searchUserName(fieldUser.getText());
+                Employee employee = ControllerEmployee.getInstance().searchEmployee(fieldName.getText());
+                User user = ControllerUser.getInstance().searchUser(fieldUser.getText());
                 if (user != null) {
                     Alert.getInstance().showAlert(gridPane, "ERROR", "EL USUARIO YA ESTÁ REGISTRADO");
                 } else if (employee != null) {
@@ -268,7 +265,7 @@ class CreateEmployee {
                             comboBoxRol.getSelectionModel().getSelectedItem(), fieldUser.getText().trim().toUpperCase(),
                             fieldPassword.getText().trim().toUpperCase(), userRole);
                     ViewEmployee.getInstance().updateTableViewItems();
-                    Alert.getInstance().showNotification("EMPLEADO", "EMPLEADO AGREGADO EXITOSAMENTE");
+                    Alert.getInstance().showNotification("EMPLEADOS", "EMPLEADO AGREGADO EXITOSAMENTE");
                 }
             }
         });
@@ -300,7 +297,6 @@ class UpdateEmployee {
 
     GridPane getGridPane(Employee employee) {
         GridPane gridPane = new GridPane();
-        RequiredFieldValidator validator = new RequiredFieldValidator();
 
         double x = ScreenSize.getInstance().getX();
         double y = ScreenSize.getInstance().getY();
@@ -319,7 +315,6 @@ class UpdateEmployee {
         fieldName.setPromptText("NOMBRE");
         fieldName.setLabelFloat(true);
         fieldName.setPrefWidth(x);
-        fieldName.getValidators().add(validator);
         gridPane.add(fieldName, 0, 6, 2, 1);
 
         String[] options = { "MECÁNICO", "ADMINISTRADOR", "RECEPTOR/PAGADOR" };
@@ -336,7 +331,6 @@ class UpdateEmployee {
         fieldUser.setPromptText("USUARIO");
         fieldUser.setLabelFloat(true);
         fieldUser.setPrefWidth(x);
-        fieldUser.getValidators().add(validator);
         gridPane.add(fieldUser, 0, 8, 2, 1);
 
         JFXPasswordField fieldPassword = new JFXPasswordField();
@@ -361,7 +355,7 @@ class UpdateEmployee {
                         fieldUser.getText().trim().toUpperCase(), fieldPassword.getText().trim().toUpperCase(),
                         userRole);
                 if (ControllerEmployee.getInstance().updateEmployee()) {
-                    Alert.getInstance().showNotification("EMPLEADO", "EMPLEADO ACTUALIZADO EXITOSAMENTE");
+                    Alert.getInstance().showNotification("EMPLEADOS", "EMPLEADO ACTUALIZADO EXITOSAMENTE");
                 } else {
                     Alert.getInstance().showAlert(gridPane, "ERROR", "ERROR AL MODIFICAR EMPLEADO");
                 }

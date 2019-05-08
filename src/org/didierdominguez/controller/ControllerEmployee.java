@@ -24,7 +24,7 @@ public class ControllerEmployee {
     }
 
     public void createEmployee(String name, String role, String userName, String password, Boolean userRole) {
-        if (searchEmployeeName(name) == null) {
+        if (searchEmployee(name) == null) {
             User user = ControllerUser.getInstance().createUser(userName.toUpperCase().trim(), password, userRole);
             if (user != null) {
                 id++;
@@ -42,7 +42,7 @@ public class ControllerEmployee {
         Employee employee = searchEmployee(id);
         update = false;
         if (employee != null) {
-            if (searchEmployeeName(name) == null || employee.getName().equalsIgnoreCase(name)) {
+            if (searchEmployee(name) == null || employee.getName().equalsIgnoreCase(name)) {
                 User user = employee.getUser();
                 ControllerUser.getInstance().updateUser(user.getId(), userName, password, userRole);
                 if (ControllerUser.getInstance().updateUser()) {
@@ -89,9 +89,10 @@ public class ControllerEmployee {
         return null;
     }
 
-    public Employee searchEmployeeName(String name) {
+    public Employee searchEmployee(String name) {
         DoubleNode auxiliaryNode = getEmployeeList().getFirstNode();
-        while (auxiliaryNode != null && !((Employee) auxiliaryNode.getObject()).getName().equalsIgnoreCase(name)) {
+        while (auxiliaryNode != null
+                && !((Employee) auxiliaryNode.getObject()).getName().equalsIgnoreCase(name)) {
             auxiliaryNode = auxiliaryNode.getNextNode();
         }
         if (auxiliaryNode != null && auxiliaryNode.getObject() != null) {

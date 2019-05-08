@@ -64,4 +64,9 @@ public class SparePart {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
