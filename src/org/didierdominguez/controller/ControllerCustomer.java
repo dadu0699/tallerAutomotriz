@@ -4,7 +4,6 @@ import org.didierdominguez.bean.Customer;
 import org.didierdominguez.bean.User;
 import org.didierdominguez.list.CircularDoubleList.CircularDoubleList;
 import org.didierdominguez.list.CircularDoubleList.CircularDoubleNode;
-import org.didierdominguez.list.CircularSimpleList.CircularSimpleList;
 
 public class ControllerCustomer {
     private static ControllerCustomer instance;
@@ -26,8 +25,7 @@ public class ControllerCustomer {
         if (searchCustomer(id) == null && searchCustomer(name) == null) {
             User user = ControllerUser.getInstance().createUser(userName.toUpperCase().trim(), password, false);
             if (user != null) {
-                CircularSimpleList carList = new CircularSimpleList();
-                Customer customer = new Customer(id, name.toUpperCase().trim(), user, role, carList);
+                Customer customer = new Customer(id, name.toUpperCase().trim(), user, role);
                 customerList.addNode(customer);
                 System.out.println("Customer added successfully");
             }
@@ -76,7 +74,7 @@ public class ControllerCustomer {
         return customerList;
     }
 
-    private Customer searchCustomer(Integer id) {
+    public Customer searchCustomer(Integer id) {
         CircularDoubleNode auxiliaryNode = getCustomerList().getNode();
         if (auxiliaryNode != null) {
             do {

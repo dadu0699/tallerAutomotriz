@@ -11,13 +11,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.didierdominguez.bean.Car;
 import org.didierdominguez.bean.Customer;
 import org.didierdominguez.bean.User;
+import org.didierdominguez.controller.ControllerCar;
 import org.didierdominguez.controller.ControllerCustomer;
 import org.didierdominguez.list.CircularDoubleList.CircularDoubleNode;
+import org.didierdominguez.list.CircularSimpleList.CircularSimpleNode;
 import org.didierdominguez.util.Alert;
 import org.didierdominguez.util.FileControl;
 import org.didierdominguez.util.ScreenSize;
@@ -26,10 +30,12 @@ import java.util.ArrayList;
 
 public class ViewCustomer extends Stage {
     private static ViewCustomer instance;
-    private HBox hBox;
-    private GridPane gridPane;
-    private TableView tableView;
-    private ObservableList observableList;
+    private HBox hBoxPanels;
+    private VBox vBoxApplications;
+    private TableView tableViewCustomer;
+    private TableView tableViewCar;
+    private ObservableList observableListCustomer;
+    private ObservableList observableListCar;
 
     private ViewCustomer() {
     }
@@ -42,11 +48,13 @@ public class ViewCustomer extends Stage {
     }
 
     public void restartHBox() {
-        hBox.getChildren().clear();
-        hBox.getChildren().add(gridPane);
+        hBoxPanels.getChildren().clear();
+        vBoxApplications.getChildren().clear();
+        vBoxApplications.getChildren().addAll(CreateCustomer.getInstance().getGridPane(), getViewCar());
+        hBoxPanels.getChildren().addAll(getViewCustomer(), vBoxApplications);
     }
 
-    private void updateObservableList() {
+    private void updateObservableListCustomer() {
         ArrayList<Customer> arrayListCustomer = new ArrayList<>();
         CircularDoubleNode auxiliaryNode = ControllerCustomer.getInstance().getCustomerList().getNode();
         if (auxiliaryNode != null) {
@@ -55,41 +63,92 @@ public class ViewCustomer extends Stage {
                 auxiliaryNode = auxiliaryNode.getPreviousNode();
             } while (auxiliaryNode != ControllerCustomer.getInstance().getCustomerList().getNode());
         }
-        if (observableList != null) {
-            observableList.clear();
+        if (observableListCustomer != null) {
+            observableListCustomer.clear();
         }
-        observableList = FXCollections.observableArrayList(arrayListCustomer);
+        observableListCustomer = FXCollections.observableArrayList(arrayListCustomer);
     }
 
-    public void updateTableViewItems() {
-        updateObservableList();
-        tableView.setItems(observableList);
+    private void updateObservableListCar(Customer customer) {
+        ArrayList<Car> arrayListCar = new ArrayList<>();
+        CircularSimpleNode auxiliaryNode = ControllerCar.getInstance().getCarList().getNode();
+        if (auxiliaryNode != null) {
+            do {
+                if (((Car) auxiliaryNode.getObject()).getCustomer() == customer) {
+                    arrayListCar.add((Car) auxiliaryNode.getObject());
+                }
+                auxiliaryNode = auxiliaryNode.getNextNode();
+            } while (auxiliaryNode != ControllerCar.getInstance().getCarList().getNode());
+        }
+        if (observableListCar != null) {
+            observableListCar.clear();
+        }
+        observableListCar = FXCollections.observableArrayList(arrayListCar);
     }
 
-    public HBox getViewCustomer() {
-        hBox = new HBox();
-        gridPane = new GridPane();
+    public void updateTableViewItemsCustomer() {
+        updateObservableListCustomer();
+        tableViewCustomer.setItems(observableListCustomer);
+    }
+
+    public void updateTableViewItemsCar(Customer customer) {
+        updateObservableListCar(customer);
+        tableViewCar.setItems(observableListCar);
+    }
+
+    public VBox getViewCustomerDetail() {
+        VBox vBox = new VBox();
+        GridPane gridPaneTitle = new GridPane();
+
+        double x = ScreenSize.getInstance().getX();
+        double y = ScreenSize.getInstance().getY();
+
+        gridPaneTitle.setVgap(10);
+        gridPaneTitle.setPadding(new Insets(20));
+        // gridPaneTitle.setGridLinesVisible(true);
+        gridPaneTitle.setMinWidth(x / 2);
+        gridPaneTitle.setPrefSize(x, y / 8);
+        vBox.setPrefSize(x, y);
+
+        Text textTitle = new Text("CLIENTES / AUTOMOVILES");
+        textTitle.getStyleClass().add("textTitle");
+        textTitle.setFont(new Font(25));
+        gridPaneTitle.add(textTitle, 0, 0);
+
+        gridPaneTitle.setPadding(new Insets(20, 20, -10, 20));
+        hBoxPanels = new HBox();
+        hBoxPanels.setPrefSize(x, 7 * y / 8);
+
+        vBoxApplications = new VBox();
+        vBoxApplications.setPrefSize(x, 7 * y / 8);
+        vBoxApplications.getChildren().addAll(CreateCustomer.getInstance().getGridPane(), getViewCar());
+
+        hBoxPanels.getChildren().addAll(getViewCustomer(), vBoxApplications);
+        vBox.getChildren().addAll(gridPaneTitle, hBoxPanels);
+        return vBox;
+    }
+
+    private GridPane getViewCustomer() {
+        GridPane gridPane = new GridPane();
 
         double x = ScreenSize.getInstance().getX();
         double y = ScreenSize.getInstance().getY();
 
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(20));
-        // gridPane.setGridLinesVisible(true);
-        gridPane.setMinWidth(x / 2);
         gridPane.setPrefSize(x, y);
-        hBox.setPrefSize(x, y);
 
         Text textTitle = new Text("CLIENTES");
         textTitle.getStyleClass().add("textTitle");
-        textTitle.setFont(new Font(25));
+        textTitle.setFont(new Font(20));
         gridPane.add(textTitle, 0, 0);
 
-        HBox hBoxButtons = new HBox();
         JFXTextField textFieldSearch = new JFXTextField();
         textFieldSearch.setPromptText("BUSCAR");
-        textFieldSearch.setPrefSize(x, y);
+        textFieldSearch.setPrefSize(x, y / 8);
+        gridPane.add(textFieldSearch, 0, 1);
 
+        HBox hBoxButtons = new HBox();
         JFXButton buttonFile = new JFXButton("ARCHIVO");
         buttonFile.getStyleClass().addAll("customButton", "primaryButton");
         buttonFile.setButtonType(JFXButton.ButtonType.FLAT);
@@ -100,11 +159,21 @@ public class ViewCustomer extends Stage {
             if (arrayList != null) {
                 for (String command: arrayList) {
                     String[] params = command.split("-");
-                    boolean role = params[4].equalsIgnoreCase("ORO");
-                    ControllerCustomer.getInstance().createCustomer(Integer.parseInt(params[0]),
-                            params[1], role, params[2], params[3]);
+                    if (ControllerCustomer.getInstance().searchCustomer(Integer.parseInt(params[0])) == null) {
+                        boolean role = params[4].equalsIgnoreCase("ORO");
+                        ControllerCustomer.getInstance().createCustomer(Integer.parseInt(params[0]),
+                                params[1], role, params[2], params[3]);
+                        String[] cars = params[5].split(";");
+                        Customer customer = ControllerCustomer.getInstance().searchCustomer(Integer.parseInt(params[0]));
+                        if (customer != null) {
+                            for (String car: cars) {
+                                String[] carDetail = car.split(",");
+                                ControllerCar.getInstance().createCar(carDetail[0], carDetail[1], carDetail[2], carDetail[3], customer);
+                            }
+                        }
+                    }
                 }
-                updateTableViewItems();
+                updateTableViewItemsCustomer();
                 Alert.getInstance().showNotification("CLIENTES", "ARCHIVO LEIDO EXITOSAMENTE");
             }
         });
@@ -113,58 +182,57 @@ public class ViewCustomer extends Stage {
         buttonAdd.getStyleClass().addAll("customButton", "primaryButton");
         buttonAdd.setButtonType(JFXButton.ButtonType.FLAT);
         buttonAdd.setPrefSize(x, y);
-        /*buttonAdd.setOnAction(event -> {
-            hBox.getChildren().clear();
-            hBox.getChildren().addAll(gridPane, CreateEmployee.getInstance().getGridPane());
-        });*/
+        buttonAdd.setOnAction(event -> restartHBox());
 
         JFXButton buttonUpdate = new JFXButton("MODIFICAR");
         buttonUpdate.getStyleClass().addAll("customButton", "warningButton");
         buttonUpdate.setButtonType(JFXButton.ButtonType.FLAT);
-        /*buttonUpdate.setOnAction(event -> {
-            hBox.getChildren().clear();
-            if (tableView.getSelectionModel().getSelectedItem() != null) {
-                hBox.getChildren().addAll(gridPane, UpdateEmployee.getInstance()
-                        .getGridPane((Employee) tableView.getSelectionModel().getSelectedItem()));
-            } else {
-                hBox.getChildren().add(gridPane);
-            }
-        });*/
         buttonUpdate.setPrefSize(x, y);
+        buttonUpdate.setOnAction(event -> {
+            if (tableViewCustomer.getSelectionModel().getSelectedItem() != null) {
+                vBoxApplications.getChildren().clear();
+                vBoxApplications.getChildren().addAll(UpdateCustomer.getInstance()
+                        .getGridPane((Customer) tableViewCustomer.getSelectionModel().getSelectedItem()), getViewCar());
+            }
+        });
 
         JFXButton buttonDelete = new JFXButton("ELIMINAR");
         buttonDelete.getStyleClass().addAll("customButton", "dangerButton");
         buttonDelete.setButtonType(JFXButton.ButtonType.FLAT);
         buttonDelete.setPrefSize(x, y);
         buttonDelete.setOnAction(event -> {
-            Customer customer = (Customer) tableView.getSelectionModel().getSelectedItem();
+            Customer customer = (Customer) tableViewCustomer.getSelectionModel().getSelectedItem();
             if (customer != null) {
-                restartHBox();
+                for (Object obj : observableListCar) {
+                    Car car = (Car) obj;
+                    ControllerCar.getInstance().deleteCar(car.getId());
+                    Alert.getInstance().showNotification("CLIENTES", "AUTOMOVIL ELIMINADO EXITOSAMENTE");
+                }
                 ControllerCustomer.getInstance().deleteCustomer(customer.getId());
-                updateTableViewItems();
+                updateTableViewItemsCar(null);
+                updateTableViewItemsCustomer();
                 Alert.getInstance().showNotification("CLIENTES", "CLIENTE ELIMINADO EXITOSAMENTE");
             }
         });
 
-        hBoxButtons.getChildren().addAll(textFieldSearch, buttonFile, buttonAdd, buttonUpdate, buttonDelete);
-        hBoxButtons.setPrefSize(x, y / 8);
-        hBoxButtons.setMargin(textFieldSearch, new Insets(0, 5, 0, 0));
+        hBoxButtons.getChildren().addAll(buttonFile, buttonAdd, buttonUpdate, buttonDelete);
         hBoxButtons.setMargin(buttonFile, new Insets(0, 5, 0, 0));
         hBoxButtons.setMargin(buttonAdd, new Insets(0, 5, 0, 0));
         hBoxButtons.setMargin(buttonUpdate, new Insets(0, 5, 0, 0));
-        gridPane.add(hBoxButtons, 0, 1);
+        hBoxButtons.setPrefSize(x, y / 8);
+        gridPane.add(hBoxButtons, 0, 2);
 
         TableColumn<Customer, Integer> columnID = new TableColumn<>("ID");
         columnID.setPrefWidth(50);
         columnID.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Customer, String> columnName = new TableColumn<>("NOMBRE");
-        columnName.setPrefWidth((3 * x / 4) / 4);
+        columnName.setPrefWidth(x/10);
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn<Customer, User> columnUser = new TableColumn<>("USUARIO");
-        columnUser.setPrefWidth((3 * x / 4) / 4);
+        columnUser.setPrefWidth(x/10);
         columnUser.setCellValueFactory(new PropertyValueFactory<>("user"));
         TableColumn<Customer, Boolean> columnRole = new TableColumn<>("TIPO");
-        columnRole.setPrefWidth((3 * x / 4) / 4);
+        columnRole.setPrefWidth(x/10);
         columnRole.setCellValueFactory(new PropertyValueFactory<>("type"));
         columnRole.setCellFactory(col -> new TableCell<Customer, Boolean>() {
             @Override
@@ -174,22 +242,98 @@ public class ViewCustomer extends Stage {
             }
         });
 
-        updateObservableList();
-        tableView = new TableView<>(observableList);
-        tableView.getColumns().addAll(columnID, columnName, columnUser, columnRole);
-        tableView.setPrefSize(x, 7 * y / 8);
-        /*tableView.setOnMouseClicked(event -> {
-            hBox.getChildren().clear();
-            if (tableView.getSelectionModel().getSelectedItem() != null) {
-                hBox.getChildren().addAll(gridPane, ShowEmployee.getInstance()
-                        .getGridPane((Employee) tableView.getSelectionModel().getSelectedItem()));
-            } else {
-                hBox.getChildren().add(gridPane);
+        updateObservableListCustomer();
+        tableViewCustomer = new TableView<>(observableListCustomer);
+        tableViewCustomer.getColumns().addAll(columnID, columnName, columnUser, columnRole);
+        tableViewCustomer.setOnMouseClicked(event -> {
+            if (tableViewCustomer.getSelectionModel().getSelectedItem() != null) {
+                updateTableViewItemsCar((Customer) tableViewCustomer.getSelectionModel().getSelectedItem());
+            }
+        });
+        tableViewCustomer.setPrefSize(x, 7 * y / 8);
+
+        gridPane.add(tableViewCustomer, 0, 3);
+        gridPane.setPadding(new Insets(-10, 10, 20, 20));
+
+        return gridPane;
+    }
+
+    private GridPane getViewCar() {
+        GridPane gridPane = new GridPane();
+
+        double x = ScreenSize.getInstance().getX();
+        double y = ScreenSize.getInstance().getY();
+
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(20));
+        gridPane.setPrefSize(x, y);
+
+        Text textTitleC = new Text("AUTOMOVILES");
+        textTitleC.getStyleClass().add("textTitle");
+        textTitleC.setFont(new Font(20));
+        gridPane.add(textTitleC, 0, 0);
+
+        HBox hBoxButtons = new HBox();
+
+        JFXButton buttonAdd = new JFXButton("AGREGAR");
+        buttonAdd.getStyleClass().addAll("customButton", "primaryButton");
+        buttonAdd.setButtonType(JFXButton.ButtonType.FLAT);
+        buttonAdd.setPrefSize(x, y);
+        /*buttonAdd.setOnAction(event -> {
+            gridPane.getChildren().clear();
+            gridPane.add(textTitle, 0, 0);
+            gridPane.add(CreateEmployeeHeadquarters.getInstance().getGridPane(), 0, 1);
+        });*/
+
+        JFXButton buttonUpdate = new JFXButton("MODIFICAR");
+        buttonUpdate.getStyleClass().addAll("customButton", "warningButton");
+        buttonUpdate.setButtonType(JFXButton.ButtonType.FLAT);
+        buttonUpdate.setPrefSize(x, y);
+        /*buttonUpdate.setOnAction(event -> {
+            if (tableViewEmployee.getSelectionModel().getSelectedItem() != null) {
+                gridPane.getChildren().clear();
+                gridPane.add(textTitle, 0, 0);
+                gridPane.add(UpdateEmployeeHeadquarters.getInstance()
+                                .getGridPane((Employee) tableViewEmployee.getSelectionModel().getSelectedItem()),
+                        0, 1);
             }
         });*/
-        gridPane.add(tableView, 0, 2);
-        hBox.getChildren().add(gridPane);
 
-        return hBox;
+        JFXButton buttonDelete = new JFXButton("ELIMINAR");
+        buttonDelete.getStyleClass().addAll("customButton", "dangerButton");
+        buttonDelete.setButtonType(JFXButton.ButtonType.FLAT);
+        buttonDelete.setPrefSize(x, y);
+        buttonDelete.setOnAction(event -> {
+            Car car = (Car) tableViewCar.getSelectionModel().getSelectedItem();
+            if (car != null) {
+                ControllerCar.getInstance().deleteCar(car.getId());
+                updateTableViewItemsCar((Customer) tableViewCustomer.getSelectionModel().getSelectedItem());
+                Alert.getInstance().showNotification("CLIENTES", "AUTOMOVIL ELIMINADO EXITOSAMENTE");
+            }
+        });
+
+        hBoxButtons.getChildren().addAll(buttonAdd, buttonUpdate, buttonDelete);
+        hBoxButtons.setPrefSize(x, y / 8);
+        hBoxButtons.setMargin(buttonAdd, new Insets(0, 5, 0, 0));
+        hBoxButtons.setMargin(buttonUpdate, new Insets(0, 5, 0, 0));
+        gridPane.add(hBoxButtons, 0, 1);
+
+        TableColumn<Car, Integer> columnIDC = new TableColumn<>("ID");
+        columnIDC.setPrefWidth(60);
+        columnIDC.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<Car, String> columnBrand = new TableColumn<>("MARCA");
+        columnBrand.setPrefWidth(x / 7);
+        columnBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        TableColumn<Car, String> columnModel = new TableColumn<>("MODELO");
+        columnModel.setPrefWidth(x / 7);
+        columnModel.setCellValueFactory(new PropertyValueFactory<>("Model"));
+
+        tableViewCar = new TableView<>(observableListCar);
+        tableViewCar.getColumns().addAll(columnIDC, columnBrand, columnModel);
+        tableViewCar.setPrefSize(x, 7 * y / 8);
+        gridPane.add(tableViewCar, 0, 2);
+
+        gridPane.setPadding(new Insets(10, 20, 20, 10));
+        return gridPane;
     }
 }

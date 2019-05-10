@@ -5,12 +5,14 @@ public class Car {
     private String brand;
     private String model;
     private String picture;
+    private Customer customer;
 
-    public Car(String id, String brand, String model, String picture) {
+    public Car(String id, String brand, String model, String picture, Customer customer) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.picture = picture;
+        this.customer = customer;
     }
 
     public String getId() {
@@ -43,5 +45,13 @@ public class Car {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

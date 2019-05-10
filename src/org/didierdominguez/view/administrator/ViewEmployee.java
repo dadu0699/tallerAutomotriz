@@ -122,6 +122,7 @@ public class ViewEmployee extends Stage {
         JFXButton buttonUpdate = new JFXButton("MODIFICAR");
         buttonUpdate.getStyleClass().addAll("customButton", "warningButton");
         buttonUpdate.setButtonType(JFXButton.ButtonType.FLAT);
+        buttonUpdate.setPrefSize(x, y);
         buttonUpdate.setOnAction(event -> {
             hBox.getChildren().clear();
             if (tableView.getSelectionModel().getSelectedItem() != null) {
@@ -131,7 +132,6 @@ public class ViewEmployee extends Stage {
                 hBox.getChildren().add(gridPane);
             }
         });
-        buttonUpdate.setPrefSize(x, y);
 
         JFXButton buttonDelete = new JFXButton("ELIMINAR");
         buttonDelete.getStyleClass().addAll("customButton", "dangerButton");

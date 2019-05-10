@@ -90,7 +90,8 @@ public class AdministrativePanel {
         buttonCustomersCars.setOnAction(event -> {
             selectButton(buttonCustomersCars);
             vBoxPanels.getChildren().clear();
-            vBoxPanels.getChildren().add(ViewCustomer.getInstance().getViewCustomer());
+            //vBoxPanels.getChildren().add(ViewCustomer.getInstance().getViewCustomer());
+            vBoxPanels.getChildren().add(ViewCustomer.getInstance().getViewCustomerDetail());
         });
 
         JFXButton buttonProgressCar = new JFXButton("   PROGRESO\nAUTOMOVILES");
