@@ -38,8 +38,8 @@ public class ControllerCustomer {
         Customer customer = searchCustomer(id);
         update = false;
         if (customer != null) {
-            if ((searchCustomer(id) == null && searchCustomer(name) == null)
-                    || (customer.getName().equalsIgnoreCase(name) && customer.getId().equals(id))) {
+            if ((searchCustomer(name) == null || customer.getName().equalsIgnoreCase(name))
+                    && (searchCustomer(id) == null || customer.getId().equals(id))) {
                 User user = customer.getUser();
                 ControllerUser.getInstance().updateUser(user.getId(), userName, password, false);
                 if (ControllerUser.getInstance().updateUser()) {

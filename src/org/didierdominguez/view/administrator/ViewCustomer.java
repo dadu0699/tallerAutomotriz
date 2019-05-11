@@ -52,6 +52,7 @@ public class ViewCustomer extends Stage {
         vBoxApplications.getChildren().clear();
         vBoxApplications.getChildren().addAll(CreateCustomer.getInstance().getGridPane(), getViewCar());
         hBoxPanels.getChildren().addAll(getViewCustomer(), vBoxApplications);
+        updateTableViewItemsCar(null);
     }
 
     private void updateObservableListCustomer() {
@@ -190,9 +191,9 @@ public class ViewCustomer extends Stage {
         buttonUpdate.setPrefSize(x, y);
         buttonUpdate.setOnAction(event -> {
             if (tableViewCustomer.getSelectionModel().getSelectedItem() != null) {
-                vBoxApplications.getChildren().clear();
-                vBoxApplications.getChildren().addAll(UpdateCustomer.getInstance()
-                        .getGridPane((Customer) tableViewCustomer.getSelectionModel().getSelectedItem()), getViewCar());
+                vBoxApplications.getChildren().remove(0);
+                vBoxApplications.getChildren().add(0, UpdateCustomer.getInstance()
+                        .getGridPane((Customer) tableViewCustomer.getSelectionModel().getSelectedItem()));
             }
         });
 
@@ -209,8 +210,7 @@ public class ViewCustomer extends Stage {
                     Alert.getInstance().showNotification("CLIENTES", "AUTOMOVIL ELIMINADO EXITOSAMENTE");
                 }
                 ControllerCustomer.getInstance().deleteCustomer(customer.getId());
-                updateTableViewItemsCar(null);
-                updateTableViewItemsCustomer();
+                restartHBox();
                 Alert.getInstance().showNotification("CLIENTES", "CLIENTE ELIMINADO EXITOSAMENTE");
             }
         });
@@ -247,6 +247,8 @@ public class ViewCustomer extends Stage {
         tableViewCustomer.getColumns().addAll(columnID, columnName, columnUser, columnRole);
         tableViewCustomer.setOnMouseClicked(event -> {
             if (tableViewCustomer.getSelectionModel().getSelectedItem() != null) {
+                vBoxApplications.getChildren().remove(0);
+                vBoxApplications.getChildren().add(0, ShowCustomer.getInstance().getGridPane((Customer) tableViewCustomer.getSelectionModel().getSelectedItem()));
                 updateTableViewItemsCar((Customer) tableViewCustomer.getSelectionModel().getSelectedItem());
             }
         });
@@ -275,29 +277,29 @@ public class ViewCustomer extends Stage {
 
         HBox hBoxButtons = new HBox();
 
-        JFXButton buttonAdd = new JFXButton("AGREGAR");
+        JFXButton buttonAdd = new JFXButton("AGREGAR AUTOMOVIL");
         buttonAdd.getStyleClass().addAll("customButton", "primaryButton");
         buttonAdd.setButtonType(JFXButton.ButtonType.FLAT);
         buttonAdd.setPrefSize(x, y);
-        /*buttonAdd.setOnAction(event -> {
-            gridPane.getChildren().clear();
-            gridPane.add(textTitle, 0, 0);
-            gridPane.add(CreateEmployeeHeadquarters.getInstance().getGridPane(), 0, 1);
-        });*/
+        buttonAdd.setOnAction(event -> {
+            if (tableViewCustomer.getSelectionModel().getSelectedItem() != null) {
+                vBoxApplications.getChildren().remove(0);
+                vBoxApplications.getChildren().add(0, CreateCar.getInstance()
+                        .getGridPane((Customer) tableViewCustomer.getSelectionModel().getSelectedItem()));
+            }
+        });
 
         JFXButton buttonUpdate = new JFXButton("MODIFICAR");
         buttonUpdate.getStyleClass().addAll("customButton", "warningButton");
         buttonUpdate.setButtonType(JFXButton.ButtonType.FLAT);
         buttonUpdate.setPrefSize(x, y);
-        /*buttonUpdate.setOnAction(event -> {
-            if (tableViewEmployee.getSelectionModel().getSelectedItem() != null) {
-                gridPane.getChildren().clear();
-                gridPane.add(textTitle, 0, 0);
-                gridPane.add(UpdateEmployeeHeadquarters.getInstance()
-                                .getGridPane((Employee) tableViewEmployee.getSelectionModel().getSelectedItem()),
-                        0, 1);
+        buttonUpdate.setOnAction(event -> {
+            if (tableViewCar.getSelectionModel().getSelectedItem() != null) {
+                vBoxApplications.getChildren().remove(0);
+                vBoxApplications.getChildren().add(0, UpdateCar.getInstance()
+                        .getGridPane((Car) tableViewCar.getSelectionModel().getSelectedItem()));
             }
-        });*/
+        });
 
         JFXButton buttonDelete = new JFXButton("ELIMINAR");
         buttonDelete.getStyleClass().addAll("customButton", "dangerButton");
@@ -307,6 +309,8 @@ public class ViewCustomer extends Stage {
             Car car = (Car) tableViewCar.getSelectionModel().getSelectedItem();
             if (car != null) {
                 ControllerCar.getInstance().deleteCar(car.getId());
+                vBoxApplications.getChildren().remove(0);
+                vBoxApplications.getChildren().add(0, ShowCustomer.getInstance().getGridPane((Customer) tableViewCustomer.getSelectionModel().getSelectedItem()));
                 updateTableViewItemsCar((Customer) tableViewCustomer.getSelectionModel().getSelectedItem());
                 Alert.getInstance().showNotification("CLIENTES", "AUTOMOVIL ELIMINADO EXITOSAMENTE");
             }
@@ -318,14 +322,14 @@ public class ViewCustomer extends Stage {
         hBoxButtons.setMargin(buttonUpdate, new Insets(0, 5, 0, 0));
         gridPane.add(hBoxButtons, 0, 1);
 
-        TableColumn<Car, Integer> columnIDC = new TableColumn<>("ID");
-        columnIDC.setPrefWidth(60);
+        TableColumn<Car, Integer> columnIDC = new TableColumn<>("PLACA");
+        columnIDC.setPrefWidth(x / 10);
         columnIDC.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Car, String> columnBrand = new TableColumn<>("MARCA");
-        columnBrand.setPrefWidth(x / 7);
+        columnBrand.setPrefWidth(x / 10);
         columnBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         TableColumn<Car, String> columnModel = new TableColumn<>("MODELO");
-        columnModel.setPrefWidth(x / 7);
+        columnModel.setPrefWidth(x / 10);
         columnModel.setCellValueFactory(new PropertyValueFactory<>("Model"));
 
         tableViewCar = new TableView<>(observableListCar);

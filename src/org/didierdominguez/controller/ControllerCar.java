@@ -69,7 +69,7 @@ public class ControllerCar {
         return carList;
     }
 
-    private Car searchCar(String id) {
+    public Car searchCar(String id) {
         CircularSimpleNode auxiliaryNode = getCarList().getNode();
         if (auxiliaryNode != null) {
             do {

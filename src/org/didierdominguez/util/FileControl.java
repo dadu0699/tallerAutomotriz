@@ -13,9 +13,11 @@ public class FileControl {
     private String directory;
     private FileChooser fileChooser;
     private File fileControl;
+    private File fileControlImage;
 
     private FileControl() {
         directory = System.getProperty("user.dir");
+        fileControlImage = null;
     }
 
     public static FileControl getInstance() {
@@ -33,8 +35,6 @@ public class FileControl {
         fileControl = fileChooser.showOpenDialog(null);
         if (fileControl != null) {
             System.out.println(fileControl.getAbsolutePath());
-        } else {
-            System.out.println("The file is not valid");
         }
     }
 
@@ -54,5 +54,24 @@ public class FileControl {
             System.out.println("The file was not found");
         }
         return null;
+    }
+
+    public void uploadImage(String description, String extension) {
+        fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new java.io.File(directory + "/src/org/didierdominguez/assets/images/"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(description, extension));
+
+        fileControlImage = fileChooser.showOpenDialog(null);
+        if (fileControlImage != null) {
+            System.out.println(fileControlImage.getAbsolutePath());
+        }
+    }
+
+    public File getFileControlImage() {
+        return fileControlImage;
+    }
+
+    public void setFileControlImage(File fileControlImage) {
+        this.fileControlImage = fileControlImage;
     }
 }
