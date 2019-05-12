@@ -110,8 +110,7 @@ public class AdministrativePanel {
         buttonReport.setOnAction(event -> {
             selectButton(buttonReport);
             vBoxPanels.getChildren().clear();
-            Notifications.create().title("Title Text").text("Hello World 0!").hideAfter(Duration.millis(2500))
-                    .position(TOP_RIGHT).show();
+            vBoxPanels.getChildren().add(ViewReport.getInstance().getViewReport());
         });
 
         JFXButton buttonLogOut = new JFXButton("CERRAR SESIÓN");

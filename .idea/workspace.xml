@@ -64,86 +64,16 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="DockManager">
-    <window id="3">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/AdministrativePanel.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1320">
-                    <caret line="55" column="46" lean-forward="true" selection-start-line="55" selection-start-column="46" selection-end-line="58" selection-end-column="87" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/ViewEmployee.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1945">
-                    <caret line="450" lean-forward="true" selection-start-line="375" selection-start-column="1" selection-end-line="450" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/CRUDCar.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="607">
-                    <caret line="324" selection-start-line="324" selection-end-line="335" selection-end-column="11" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/customer/ViewCar.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="201">
-                    <caret line="407" column="5" lean-forward="true" selection-start-line="299" selection-start-column="5" selection-end-line="407" selection-end-column="5" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/ViewCustomer.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="-2151">
-                    <caret line="144" column="38" lean-forward="true" selection-start-line="144" selection-start-column="38" selection-end-line="149" selection-end-column="44" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FavoritesManager">
     <favorites_list name="JavaFxApplication" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/customer/CustomerPanel.java">
+        <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/util/ReportGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1689">
-              <caret line="107" column="33" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
+            <state relative-caret-position="129">
+              <caret line="27" column="27" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -152,10 +82,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/customer/ViewCar.java">
+        <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/ViewReport.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="204" column="37" selection-start-line="204" selection-start-column="37" selection-end-line="204" selection-end-column="37" />
+            <state relative-caret-position="144">
+              <caret line="84" column="95" selection-start-line="84" selection-start-column="95" selection-end-line="84" selection-end-column="95" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/ViewCustomer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="240" column="62" selection-start-line="240" selection-start-column="39" selection-end-line="240" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -252,12 +194,15 @@
         <option value="$PROJECT_DIR$/src/org/didierdominguez/controller/ControllerCustomer.java" />
         <option value="$PROJECT_DIR$/src/org/didierdominguez/assets/stylesheets/style.css" />
         <option value="$PROJECT_DIR$/src/org/didierdominguez/view/login/Signup.java" />
-        <option value="$PROJECT_DIR$/src/org/didierdominguez/view/administrator/AdministrativePanel.java" />
         <option value="$PROJECT_DIR$/src/org/didierdominguez/view/login/Login.java" />
         <option value="$PROJECT_DIR$/src/org/didierdominguez/Main.java" />
         <option value="$PROJECT_DIR$/src/org/didierdominguez/view/customer/CustomerPanel.java" />
         <option value="$PROJECT_DIR$/src/org/didierdominguez/view/administrator/CRUDCar.java" />
         <option value="$PROJECT_DIR$/src/org/didierdominguez/view/customer/ViewCar.java" />
+        <option value="$PROJECT_DIR$/src/org/didierdominguez/view/administrator/AdministrativePanel.java" />
+        <option value="$PROJECT_DIR$/src/org/didierdominguez/util/HTMLGenerator.java" />
+        <option value="$PROJECT_DIR$/src/org/didierdominguez/util/ReportGenerator.java" />
+        <option value="$PROJECT_DIR$/src/org/didierdominguez/view/administrator/ViewReport.java" />
       </list>
     </option>
   </component>
@@ -300,7 +245,7 @@
               <item name="tallerAutomotriz" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="didierdominguez" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -453,7 +398,7 @@
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" weight="0.22844176" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.22844176" />
       <window_info id="Structure" order="1" weight="0.24962178" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -502,20 +447,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/jfoenix-8.0.8.jar!/css/controls/jfx-combo-box.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="22" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/util/ScreenSize.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-198" />
@@ -794,13 +725,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/util/ReportGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="32" column="33" lean-forward="true" selection-start-line="32" selection-start-column="33" selection-end-line="36" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/controller/ControllerCar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
@@ -923,26 +847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/customer/CustomerPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1689">
-          <caret line="107" column="33" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/AdministrativePanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="55" column="46" lean-forward="true" selection-start-line="55" selection-start-column="46" selection-end-line="58" selection-end-column="87" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/ViewEmployee.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1945">
@@ -977,20 +881,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/ViewCustomer.java">
+    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/customer/ViewCar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2151">
-          <caret line="144" column="38" lean-forward="true" selection-start-line="144" selection-start-column="38" selection-end-line="149" selection-end-column="44" />
+        <state relative-caret-position="201">
+          <caret line="407" column="5" lean-forward="true" selection-start-line="299" selection-start-column="5" selection-end-line="407" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/customer/ViewCar.java">
+    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/customer/CustomerPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="204" column="37" selection-start-line="204" selection-start-column="37" selection-end-line="204" selection-end-column="37" />
+        <state relative-caret-position="1689">
+          <caret line="107" column="33" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/AdministrativePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="112" column="81" selection-start-line="112" selection-start-column="81" selection-end-line="112" selection-end-column="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/ViewCustomer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="240" column="62" selection-start-line="240" selection-start-column="39" selection-end-line="240" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/util/HTMLGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="5" column="42" lean-forward="true" selection-start-line="5" selection-start-column="42" selection-end-line="9" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/util/ReportGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/didierdominguez/view/administrator/ViewReport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="84" column="95" selection-start-line="84" selection-start-column="95" selection-end-line="84" selection-end-column="95" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

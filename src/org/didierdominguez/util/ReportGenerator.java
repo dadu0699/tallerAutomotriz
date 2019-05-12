@@ -13,11 +13,17 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Field;
 
 public class ReportGenerator {
     private static ReportGenerator instance;
     private String directory;
+    private File file;
+    private FileWriter fileWriter;
+    private PrintWriter printWriter;
 
     private ReportGenerator() {
         directory = System.getProperty("user.dir") + "/reports";
@@ -34,6 +40,18 @@ public class ReportGenerator {
         File directory = new File(this.directory);
         if (!directory.exists()) {
             directory.mkdir();
+        }
+    }
+
+    public void writeFile(String content, String name) {
+        createFolder();
+        try {
+            file = new File(directory + "/" + name);
+            fileWriter = new FileWriter(file, false);
+            printWriter = new PrintWriter(fileWriter, true);
+            printWriter.println(content);
+            printWriter.close();
+        } catch (IOException ex) {
         }
     }
 
