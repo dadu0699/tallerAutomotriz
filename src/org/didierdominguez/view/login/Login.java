@@ -11,10 +11,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.didierdominguez.Main;
+import org.didierdominguez.bean.Customer;
 import org.didierdominguez.bean.User;
+import org.didierdominguez.controller.ControllerCustomer;
 import org.didierdominguez.controller.ControllerUser;
 import org.didierdominguez.util.ScreenSize;
 import org.didierdominguez.view.administrator.AdministrativePanel;
+import org.didierdominguez.view.customer.CustomerPanel;
 
 public class Login {
     private static Login instance;
@@ -36,7 +39,7 @@ public class Login {
         double y = ScreenSize.getInstance().getY();
 
         gridPane.setId("gridPaneAccessWindow");
-        gridPane.setVgap(10);
+        gridPane.setVgap(15);
         gridPane.setHgap(10);
         gridPane.setPadding(new Insets(20));
         // gridPane.setGridLinesVisible(true);
@@ -47,18 +50,18 @@ public class Login {
         gridPane.add(textTitle, 0, 0);
 
         JFXTextField fieldUser = new JFXTextField();
-        fieldUser.setPromptText("Usuario");
+        fieldUser.setPromptText("USUARIO");
         fieldUser.setId("fieldUser");
         fieldUser.setPrefSize(x, y);
         gridPane.add(fieldUser, 0, 1);
 
         JFXPasswordField fieldPassword = new JFXPasswordField();
-        fieldPassword.setPromptText("Contraseña");
+        fieldPassword.setPromptText("CONTRASEÑA");
         fieldPassword.setId("fieldPassword");
         fieldPassword.setPrefSize(x, y);
         gridPane.add(fieldPassword, 0, 2);
 
-        JFXButton buttonSignIn = new JFXButton("Iniciar sesión");
+        JFXButton buttonSignIn = new JFXButton("INICIAR SESIÓN");
         buttonSignIn.getStyleClass().addAll("customButton", "primaryButton");
         buttonSignIn.setButtonType(JFXButton.ButtonType.FLAT);
         buttonSignIn.setPrefSize(x, y);
@@ -69,23 +72,26 @@ public class Login {
                 if (user.getRole()) {
                     AdministrativePanel.getInstance().showWindow();
                 } else {
-                    System.out.println("Cliente");
+                    Customer customer = ControllerCustomer.getInstance().searchCustomer(user);
+                    if (customer != null) {
+                        CustomerPanel.getInstance().showWindow(customer);
+                    }
                 }
             }
         });
         GridPane.setMargin(buttonSignIn, new Insets(5, 0, 0, 0));
         gridPane.add(buttonSignIn, 0, 3);
 
-        Text label = new Text("¿Nuevo en el sitio?");
+        Text label = new Text("¿NUEVO EN EL SITIO?");
         label.getStyleClass().add("textTitlehref");
         GridPane.setHalignment(label, HPos.RIGHT);
-        GridPane.setMargin(label, new Insets(-5, 105, 0, 0));
+        GridPane.setMargin(label, new Insets(-10, 130, 0, 0));
         gridPane.add(label, 0, 4);
 
-        Text text = new Text("Crear una cuenta");
+        Text text = new Text("CREAR UNA CUENTA");
         text.getStyleClass().add("texthref");
         GridPane.setHalignment(text, HPos.RIGHT);
-        GridPane.setMargin(text, new Insets(-5, 0, 0, 0));
+        GridPane.setMargin(text, new Insets(-10, 0, 0, 0));
         gridPane.add(text, 0, 4);
         text.setOnMouseClicked(event -> Signup.getInstance().showWindow());
 
@@ -102,6 +108,7 @@ public class Login {
         stage.setWidth(480);
         stage.setHeight(270);
         stage.setMaximized(false);
+        stage.centerOnScreen();
 
         root.getChildren().addAll(getLogin());
         stage.show();

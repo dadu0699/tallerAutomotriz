@@ -335,6 +335,12 @@ public class ViewCustomer extends Stage {
         tableViewCar = new TableView<>(observableListCar);
         tableViewCar.getColumns().addAll(columnIDC, columnBrand, columnModel);
         tableViewCar.setPrefSize(x, 7 * y / 8);
+        tableViewCar.setOnMouseClicked(event -> {
+            if (tableViewCar.getSelectionModel().getSelectedItem() != null) {
+                vBoxApplications.getChildren().remove(0);
+                vBoxApplications.getChildren().add(0, ShowCar.getInstance().getGridPane((Car) tableViewCar.getSelectionModel().getSelectedItem()));
+            }
+        });
         gridPane.add(tableViewCar, 0, 2);
 
         gridPane.setPadding(new Insets(10, 20, 20, 10));

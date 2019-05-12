@@ -20,6 +20,10 @@
     -fx-cursor: hand;
 }
 
+.uploadImageView {
+    -fx-cursor: hand;
+}
+
 .label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #F8F8F2FF;
@@ -74,8 +78,25 @@
     -fx-background-insets: 0, 0 5 0 0;
 }
 
+.selectedPanelNavButton {
+    -fx-background-color: #E91E63, #393C4BFF;
+    -fx-background-insets: 0, 0 0 2 0;
+}
+
+.selectedPanelNavButton:hover {
+    -fx-background-color: #ED4B82, #44475AFF;
+    -fx-background-insets: 0, 0 0 2 0;
+}
+
 .headerButton:disabled {
     -fx-font-size: 25;
+    -fx-opacity: 1.0;
+    -fx-background-color: #2B2E3AFF;
+    -fx-cursor: default;
+}
+
+.headerNavButton:disabled {
+    -fx-font-size: 20;
     -fx-opacity: 1.0;
     -fx-background-color: #2B2E3AFF;
     -fx-cursor: default;

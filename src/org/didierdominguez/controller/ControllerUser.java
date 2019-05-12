@@ -97,7 +97,7 @@ public class ControllerUser {
         SimpleNode auxiliaryNode = getUserList().getFirstNode();
         while (auxiliaryNode != null
                 && (!((User) auxiliaryNode.getObject()).getUserName().equalsIgnoreCase(userName)
-                || !((User) auxiliaryNode.getObject()).getPassword().equalsIgnoreCase(password))) {
+                || !((User) auxiliaryNode.getObject()).getPassword().equals(password))) {
             auxiliaryNode = auxiliaryNode.getNextNode();
         }
         if (auxiliaryNode != null && auxiliaryNode.getObject() != null) {

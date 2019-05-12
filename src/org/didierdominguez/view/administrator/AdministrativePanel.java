@@ -15,7 +15,6 @@ import static javafx.geometry.Pos.TOP_RIGHT;
 
 public class AdministrativePanel {
     private static AdministrativePanel instance;
-    private HBox hBox;
     private VBox vBoxButtons;
 
     private AdministrativePanel() {
@@ -29,7 +28,7 @@ public class AdministrativePanel {
     }
 
     private HBox getPane() {
-        hBox = new HBox();
+        HBox hBox = new HBox();
         vBoxButtons = new VBox();
         VBox vBoxPanels = new VBox();
 
@@ -90,7 +89,6 @@ public class AdministrativePanel {
         buttonCustomersCars.setOnAction(event -> {
             selectButton(buttonCustomersCars);
             vBoxPanels.getChildren().clear();
-            //vBoxPanels.getChildren().add(ViewCustomer.getInstance().getViewCustomer());
             vBoxPanels.getChildren().add(ViewCustomer.getInstance().getViewCustomerDetail());
         });
 
@@ -117,7 +115,7 @@ public class AdministrativePanel {
         });
 
         JFXButton buttonLogOut = new JFXButton("CERRAR SESIÓN");
-        buttonLogOut.setId("buttonReport");
+        buttonLogOut.setId("buttonLogOut");
         buttonLogOut.getStyleClass().addAll("panelButton", "primaryButton");
         buttonLogOut.setPrefSize(x, y / 8);
         buttonLogOut.setButtonType(JFXButton.ButtonType.FLAT);
@@ -125,7 +123,6 @@ public class AdministrativePanel {
 
         vBoxButtons.getChildren().addAll(buttonHeader, buttonEmployees, buttonSpareParts, buttonServices,
                 buttonCustomersCars, buttonProgressCar, buttonReport, buttonLogOut);
-        // vBoxPanels.getChildren().add(anchorPane);
         hBox.getChildren().addAll(vBoxButtons, vBoxPanels);
 
         return hBox;

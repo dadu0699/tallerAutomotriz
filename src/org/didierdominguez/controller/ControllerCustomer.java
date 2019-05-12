@@ -101,4 +101,18 @@ public class ControllerCustomer {
         }
         return null;
     }
+
+    public Customer searchCustomer(User user) {
+        CircularDoubleNode auxiliaryNode = getCustomerList().getNode();
+        if (auxiliaryNode != null) {
+            do {
+                if (((Customer) auxiliaryNode.getObject()).getUser().equals(user)) {
+                    return (Customer) auxiliaryNode.getObject();
+                } else {
+                    auxiliaryNode = auxiliaryNode.getNextNode();
+                }
+            } while (auxiliaryNode != getCustomerList().getNode());
+        }
+        return null;
+    }
 }
