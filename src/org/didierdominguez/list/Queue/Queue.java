@@ -39,9 +39,9 @@ public class Queue {
         }
     }
 
-    public Object getfirstNode() {
+    public QueueNode getfirstNode() {
         if (!isEmpty()) {
-            return firstNode.getObject();
+            return firstNode;
         }
         return null;
     }
@@ -50,7 +50,7 @@ public class Queue {
         return length;
     }
 
-    private QueueNode getLastNode() {
+    public QueueNode getLastNode() {
         QueueNode lastNode = firstNode;
         while (lastNode.getNextNode() != null) {
             lastNode = lastNode.getNextNode();

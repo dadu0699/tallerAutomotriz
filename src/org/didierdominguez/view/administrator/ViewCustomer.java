@@ -136,7 +136,7 @@ public class ViewCustomer extends Stage {
         double y = ScreenSize.getInstance().getY();
 
         gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(5, 10, 20, 20));
         gridPane.setPrefSize(x, y);
 
         Text textTitle = new Text("CLIENTES");
@@ -255,8 +255,6 @@ public class ViewCustomer extends Stage {
         tableViewCustomer.setPrefSize(x, 7 * y / 8);
 
         gridPane.add(tableViewCustomer, 0, 3);
-        gridPane.setPadding(new Insets(-10, 10, 20, 20));
-
         return gridPane;
     }
 
@@ -267,7 +265,7 @@ public class ViewCustomer extends Stage {
         double y = ScreenSize.getInstance().getY();
 
         gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(10, 20, 20, 10));
         gridPane.setPrefSize(x, y);
 
         Text textTitleC = new Text("AUTOMOVILES");
@@ -342,8 +340,6 @@ public class ViewCustomer extends Stage {
             }
         });
         gridPane.add(tableViewCar, 0, 2);
-
-        gridPane.setPadding(new Insets(10, 20, 20, 10));
         return gridPane;
     }
 }

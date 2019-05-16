@@ -100,6 +100,7 @@ public class AdministrativePanel {
         buttonProgressCar.setOnAction(event -> {
             selectButton(buttonProgressCar);
             vBoxPanels.getChildren().clear();
+            vBoxPanels.getChildren().add(ViewQueue.getInstance().getView());
         });
 
         JFXButton buttonReport = new JFXButton("REPORTES");
@@ -147,8 +148,9 @@ public class AdministrativePanel {
         root.getChildren().clear();
 
         stage.hide();
-        stage.setWidth(848);
-        stage.setHeight(480);
+        stage.setWidth(1280);
+        stage.setHeight(720);
+        stage.centerOnScreen();
         stage.setMaximized(true);
 
         root.getChildren().addAll(getPane());

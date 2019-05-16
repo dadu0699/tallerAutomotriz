@@ -9,15 +9,21 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.didierdominguez.bean.Customer;
+import org.didierdominguez.bean.SparePart;
+import org.didierdominguez.controller.ControllerCar;
 import org.didierdominguez.controller.ControllerCustomer;
+import org.didierdominguez.controller.ControllerSparePart;
 import org.didierdominguez.list.CircularDoubleList.CircularDoubleNode;
+import org.didierdominguez.list.SimpleList.SimpleNode;
 import org.didierdominguez.util.ReportGenerator;
 import org.didierdominguez.util.ScreenSize;
 
 public class ViewReport extends Stage {
     private static ViewReport instance;
+    private String colors;
 
     private ViewReport() {
+        colors = "'#ffc785','#7189bf','#df7599','#72d6c9','#c6c9d0','#c44b6c','#218b81','#f27348','#2ad0ce','#38667e'";
     }
 
     public static ViewReport getInstance() {
@@ -61,7 +67,7 @@ public class ViewReport extends Stage {
                     "shrink-to-fit=no\"><!-- Bootstrap CSS --><link rel=\"stylesheet\" " +
                     "href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\">" +
                     "<link rel=\"stylesheet\" type=\"text/css\" " +
-                    "href=\"https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css\"><title>CLIENTES</title>" +
+                    "href=\"https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css\"><title>customerReport</title>" +
                     "</head><body><div class=\"container\" align=\"center\"><br><h2>TABLA DE CLIENTES</h2><hr><table id=\"example\" " +
                     "class=\"display\" style=\"width:100%\"><thead><tr><th>ID</th><th>NOMBRE</th><th>USUARIO</th>" +
                     "<th>TIPO</th></tr></thead><tbody><tr>";
@@ -81,7 +87,7 @@ public class ViewReport extends Stage {
                     auxiliaryNode = auxiliaryNode.getPreviousNode();
                 } while (auxiliaryNode != ControllerCustomer.getInstance().getCustomerList().getNode());
             }
-            content += "</tbody></table></div><div class=\"container\" align=\"center\"><br><h2>GRÁFICA DE CLIENTES" +
+            content += "</tbody></table></div><div class=\"container\" align=\"center\"><br><h2>GRÁFICA TIPO DE CLIENTES" +
                     "</h2><hr><br><div style=\"width:40%\"><canvas id=\"myChart\" width=\"100\" height=\"100\">" +
                     "</canvas><br></div></div><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\"></script>" +
                     "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\"></script>" +
@@ -91,8 +97,8 @@ public class ViewReport extends Stage {
                     "<script>$(document).ready(function () {$('#example').DataTable({\"order\": [[0, \"desc\"]]});});" +
                     "</script><script>var ctx=document.getElementById('myChart').getContext('2d');var myPieChart=new Chart" +
                     "(ctx,{type:'pie',data:{labels:['ORO','NORMAL'],datasets: [{data: ["+ gold +","+ normal +"]," +
-                    "backgroundColor:['rgba(255,215,0,0.2)','rgba(54,162,235,0.2)'],borderColor:['rgba(255,215,0,1)'," +
-                    "'rgba(54,162,235,1)'],borderWidth:1}]},options:{responsive:true}});</script></body></html>";
+                    "backgroundColor:["+colors+"],borderColor:["+colors+"],borderWidth:1}]}," +
+                    "options:{responsive:true}});</script></body></html>";
             ReportGenerator.getInstance().writeFile(content, "customerReport.html");
         });
 
@@ -105,6 +111,46 @@ public class ViewReport extends Stage {
         buttonMoreExpensiveParts.getStyleClass().addAll("panelButton", "primaryButton");
         buttonMoreExpensiveParts.setPrefSize(x, y);
         buttonMoreExpensiveParts.setButtonType(JFXButton.ButtonType.FLAT);
+        buttonMoreExpensiveParts.setOnAction(event -> {
+            String name = "";
+            String price = "";
+            int count = 0;
+            String content = "<!doctype html><html lang=\"es\"><head><!-- Required meta tags --><meta " +
+                    "charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, " +
+                    "shrink-to-fit=no\"><!-- Bootstrap CSS --><link rel=\"stylesheet\" " +
+                    "href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\">" +
+                    "<link rel=\"stylesheet\" type=\"text/css\" " +
+                    "href=\"https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css\"><title>sparePartsReport</title>" +
+                    "</head><body><div class=\"container\" align=\"center\"><br><h2>TABLA DE REPUESTOS MÁS CAROS</h2><hr><table id=\"example\" " +
+                    "class=\"display\" style=\"width:100%\"><thead><tr><th>ID</th><th>NOMBRE</th><th>MARCA</th>" +
+                    "<th>MODELO</th><th>STOCK</th><th>PRECIO</th></tr></thead><tbody><tr>";
+
+            SimpleNode auxiliaryNode = ControllerSparePart.getInstance().getSparePartListSortedByPrice().getFirstNode();
+            while (auxiliaryNode != null && count < 10) {
+                content += "<td>"+((SparePart) auxiliaryNode.getObject()).getId()+"</td>"
+                        +"<td>"+((SparePart) auxiliaryNode.getObject()).getName()+"</td>"
+                        +"<td>"+((SparePart) auxiliaryNode.getObject()).getBrand()+"</td>"
+                        +"<td>"+((SparePart) auxiliaryNode.getObject()).getModel()+"</td>"
+                        +"<td>"+((SparePart) auxiliaryNode.getObject()).getStock()+"</td>"
+                        +"<td>"+((SparePart) auxiliaryNode.getObject()).getPrice()+"</td></tr>";
+                name += "'"+((SparePart) auxiliaryNode.getObject()).getName() + "',";
+                price += ((SparePart) auxiliaryNode.getObject()).getPrice() + ",";
+                auxiliaryNode = auxiliaryNode.getNextNode();
+                count++;
+            }
+            content += "</tbody></table></div><div class=\"container\" align=\"center\"><br><h2>GRÁFICA REPUESTOS MÁS CAROS" +
+                    "</h2><hr><br><div style=\"width:40%\"><canvas id=\"myChart\" width=\"100\" height=\"100\">" +
+                    "</canvas><br></div></div><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\"></script>" +
+                    "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\"></script>" +
+                    "<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\"></script>" +
+                    "<script src=\"https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js\"></script>" +
+                    "<script src=\"https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js\"></script>" +
+                    "<script>$(document).ready(function () {$('#example').DataTable({\"order\": [[5, \"desc\"]]});});" +
+                    "</script><script>var ctx=document.getElementById('myChart').getContext('2d');var myPieChart=new Chart" +
+                    "(ctx,{type:'bar',data:{labels:["+ name +"],datasets: [{data: ["+ price +"]," +
+                    "backgroundColor:["+colors+"],borderColor:["+colors+"],borderWidth:1}]},options:{responsive:true}});</script></body></html>";
+            ReportGenerator.getInstance().writeFile(content, "sparePartsReport.html");
+        });
 
         JFXButton buttonMostUsedServices = new JFXButton("TOP 10, SERVICIOS MÁS USADOS ");
         buttonMostUsedServices.getStyleClass().addAll("panelButton", "primaryButton");

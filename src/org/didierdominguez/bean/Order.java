@@ -1,17 +1,15 @@
 package org.didierdominguez.bean;
 
-import java.util.Date;
-
 public class Order {
     private Integer id;
     private Car car;
     private Customer customer;
     private Service service;
-    private Date date;
+    private String date;
     private Employee employee;
     private String state;
 
-    public Order(Integer id, Car car, Customer customer, Service service, Date date, Employee employee, String state) {
+    public Order(Integer id, Car car, Customer customer, Service service, String date, Employee employee, String state) {
         this.id = id;
         this.car = car;
         this.customer = customer;
@@ -53,11 +51,11 @@ public class Order {
         this.service = service;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

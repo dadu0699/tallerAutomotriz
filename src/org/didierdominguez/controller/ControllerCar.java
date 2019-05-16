@@ -30,6 +30,7 @@ public class ControllerCar {
         } else {
             System.out.println("The car is already registered");
         }
+        ControllerService.getInstance().createService("DIAGNOSTICO", brand, model, 500.0);
     }
 
     public void updateCar(String id, String brand, String model, String picture) {

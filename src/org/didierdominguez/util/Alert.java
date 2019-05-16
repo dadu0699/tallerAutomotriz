@@ -9,6 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import org.didierdominguez.Main;
 
 import static javafx.geometry.Pos.TOP_RIGHT;
 
@@ -47,6 +48,6 @@ public class Alert extends Stage {
 
     public void showNotification(String title, String description) {
         Notifications.create().title(title).text(description).hideAfter(Duration.millis(2500)).position(TOP_RIGHT)
-                .show();
+                .owner(Main.getStage()).show();
     }
 }

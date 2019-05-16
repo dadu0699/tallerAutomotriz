@@ -12,6 +12,7 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -52,6 +53,19 @@ public class ReportGenerator {
             printWriter.println(content);
             printWriter.close();
         } catch (IOException ex) {
+        }
+
+        if(!Desktop.isDesktopSupported()){
+            System.out.println("Desktop is not supported");
+            return;
+        }
+        Desktop desktop = Desktop.getDesktop();
+        if(file.exists()) {
+            try {
+                desktop.open(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

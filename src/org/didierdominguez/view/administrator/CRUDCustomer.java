@@ -39,7 +39,7 @@ class CreateCustomer {
         double y = ScreenSize.getInstance().getY();
 
         gridPane.setVgap(25);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(0, 20, 10, 10));
         // gridPane.setGridLinesVisible(true);
 
         Text textTitle = new Text("AGREGAR");
@@ -99,8 +99,6 @@ class CreateCustomer {
             }
         });
         gridPane.add(buttonAdd, 0, 5);
-
-        gridPane.setPadding(new Insets(-10, 20, 10, 10));
         return gridPane;
     }
 }
@@ -125,7 +123,7 @@ class UpdateCustomer{
 
         gridPane.setVgap(25);
         gridPane.setHgap(5);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(0, 20, 10, 10));
 
         Text textTitle = new Text("MODIFICAR");
         textTitle.getStyleClass().add("textTitle");
@@ -188,7 +186,6 @@ class UpdateCustomer{
         buttonCancel.setOnAction(event -> ViewCustomer.getInstance().restartHBox());
         gridPane.add(buttonCancel, 1, 5);
 
-        gridPane.setPadding(new Insets(-10, 20, 10, 10));
         return gridPane;
     }
 }
@@ -213,7 +210,7 @@ class ShowCustomer {
         double y = ScreenSize.getInstance().getY();
 
         gridPane.setVgap(25);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(0, 20, 10, 10));
         // gridPane.setGridLinesVisible(true);
 
         Text textTitle = new Text("MOSTRAR");
@@ -264,7 +261,6 @@ class ShowCustomer {
         });
         gridPane.add(buttonCopy, 0, 5);
 
-        gridPane.setPadding(new Insets(-10, 20, 10, 10));
         return gridPane;
     }
 }

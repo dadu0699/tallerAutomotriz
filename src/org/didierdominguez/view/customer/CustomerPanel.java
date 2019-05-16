@@ -64,6 +64,7 @@ public class CustomerPanel {
         buttonProgressCar.setOnAction(event -> {
             selectButton(buttonProgressCar);
             vBoxPanels.getChildren().clear();
+            vBoxPanels.getChildren().add(ViewAutomobileProgress.getInstance().getView(customer));
         });
 
         JFXButton buttonInvoice = new JFXButton("FACTURAS");
@@ -110,8 +111,9 @@ public class CustomerPanel {
         root.getChildren().clear();
 
         stage.hide();
-        stage.setWidth(848);
-        stage.setHeight(480);
+        stage.setWidth(1280);
+        stage.setHeight(720);
+        stage.centerOnScreen();
         stage.setMaximized(true);
 
         root.getChildren().addAll(getPane());

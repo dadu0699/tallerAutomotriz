@@ -76,4 +76,9 @@ public class Service {
     public void setTotal(Double total) {
         this.total = total;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

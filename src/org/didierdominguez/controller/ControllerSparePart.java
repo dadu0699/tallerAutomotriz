@@ -99,4 +99,29 @@ public class ControllerSparePart {
         }
         return null;
     }
+
+    public SimpleList getSparePartListSortedByPrice() {
+        SimpleList sparePartListSorted = sparePartList;
+        SimpleNode current = sparePartListSorted.getFirstNode();
+        SimpleNode index;
+        Object temp;
+
+        if(sparePartListSorted.getFirstNode() != null) {
+            while(current != null) {
+                index = current.getNextNode();
+                while(index != null) {
+                    if(((SparePart) current.getObject()).getPrice() < ((SparePart) index.getObject()).getPrice()) {
+                        temp = current.getObject();
+                        current.setObject(index.getObject());
+                        index.setObject(temp);
+                    }
+                    index = index.getNextNode();
+                }
+                current = current.getNextNode();
+            }
+        }
+        return sparePartListSorted;
+    }
+
+
 }

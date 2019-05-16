@@ -192,7 +192,8 @@ public class ViewService extends Stage {
         tableView.setPrefSize(x, 7 * y / 8);
         tableView.setOnMouseClicked(event -> {
             hBox.getChildren().clear();
-            if (tableView.getSelectionModel().getSelectedItem() != null) {
+            if (tableView.getSelectionModel().getSelectedItem() != null
+                    && !((Service) tableView.getSelectionModel().getSelectedItem()).getName().equalsIgnoreCase("DIAGNOSTICO")) {
                 hBox.getChildren().addAll(gridPane, ShowService.getInstance().getViewSparePart((Service)
                         tableView.getSelectionModel().getSelectedItem()));
             } else {

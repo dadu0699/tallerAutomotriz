@@ -54,4 +54,9 @@ public class Car {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    @Override
+    public String toString() {
+        return this.brand + " " + this.model;
+    }
 }

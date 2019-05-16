@@ -10,6 +10,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import org.didierdominguez.Main;
 import org.didierdominguez.bean.Car;
 import org.didierdominguez.bean.Customer;
 import org.didierdominguez.controller.ControllerCar;
@@ -49,7 +50,7 @@ class CreateCar {
 
         gridPane.setVgap(25);
         gridPane.setHgap(5);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(0, 20, 20, 10));
         // gridPane.setGridLinesVisible(true);
 
         Text textTitle = new Text("AGREGAR");
@@ -64,7 +65,7 @@ class CreateCar {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        imageView.setFitWidth(3*x/16);
+        imageView.setFitWidth(3* Main.getStage().getWidth()/16);
         imageView.setPreserveRatio(true);
         imageView.setOnMouseClicked(event -> {
             FileControl.getInstance().uploadImage("carImage", "*.jpg");
@@ -127,7 +128,6 @@ class CreateCar {
         gridPane.add(buttonAdd, 0, 5, 2, 1);
         gridPane.setMargin(buttonAdd, new Insets(-5, 0, -10, 0));
 
-        gridPane.setPadding(new Insets(-10, 20, 20, 10));
         return gridPane;
     }
 }
@@ -156,7 +156,7 @@ class UpdateCar{
 
         gridPane.setVgap(25);
         gridPane.setHgap(5);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(0, 20, 20, 10));
         // gridPane.setGridLinesVisible(true);
 
         Text textTitle = new Text("MODIFICAR");
@@ -177,7 +177,7 @@ class UpdateCar{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        imageView.setFitWidth(3*x/16);
+        imageView.setFitWidth(3* Main.getStage().getWidth()/16);
         imageView.setPreserveRatio(true);
         imageView.setOnMouseClicked(event -> {
             FileControl.getInstance().uploadImage("carImage", "*.jpg");
@@ -245,7 +245,6 @@ class UpdateCar{
         gridPane.add(buttonUpdate, 0, 5, 2, 1);
         gridPane.setMargin(buttonUpdate, new Insets(-5, 0, -10, 0));
 
-        gridPane.setPadding(new Insets(-10, 20, 20, 10));
         return gridPane;
     }
 }
@@ -275,7 +274,7 @@ class ShowCar {
 
         gridPane.setVgap(25);
         gridPane.setHgap(5);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(0, 20, 20, 10));
         // gridPane.setGridLinesVisible(true);
 
         Text textTitle = new Text("MOSTRAR");
@@ -296,7 +295,7 @@ class ShowCar {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        imageView.setFitWidth(3*x/16);
+        imageView.setFitWidth(3* Main.getStage().getWidth()/16);
         imageView.setPreserveRatio(true);
         gridPane.add(imageView, 0, 1, 1, 4);
         gridPane.setMargin(imageView, new Insets(10, 0, 0, 0));
@@ -337,7 +336,6 @@ class ShowCar {
         gridPane.add(buttonCopy, 0, 5, 2, 1);
         gridPane.setMargin(buttonCopy, new Insets(-5, 0, -10, 0));
 
-        gridPane.setPadding(new Insets(-10, 20, 20, 10));
         return gridPane;
     }
 }

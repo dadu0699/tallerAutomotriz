@@ -29,8 +29,7 @@ public class ControllerService {
         if (searchService(name, brand, model) == null) {
             id++;
             Stack sparesStack = new Stack();
-            Service service = new Service(id, name.trim().toUpperCase(), brand.trim().toUpperCase(),
-                    model.trim().toUpperCase(), sparesStack, laborPrice, laborPrice);
+            Service service = new Service(id, name.trim().toUpperCase(), brand.trim().toUpperCase(), model.trim().toUpperCase(), sparesStack, laborPrice, laborPrice);
             serviceList.addLastNode(service);
             System.out.println("Service added successfully");
         } else {
@@ -100,9 +99,9 @@ public class ControllerService {
     }
 
     public void deleteService(Integer id) {
-        Service user = searchService(id);
-        if (user != null) {
-            serviceList.deleteSpecificNode(user);
+        Service service = searchService(id);
+        if (service != null) {
+            serviceList.deleteSpecificNode(service);
             System.out.println("Service deleted successfully");
         } else {
             System.out.println("Service was not found");

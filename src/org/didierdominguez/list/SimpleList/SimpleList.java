@@ -103,4 +103,25 @@ public class SimpleList {
     public SimpleNode getFirstNode() {
         return firstNode;
     }
+
+    private void sortList() {
+        SimpleNode current = firstNode;
+        SimpleNode index;
+        Object temp;
+
+        if(!isEmpty()) {
+            while(current != null) {
+                index = current.getNextNode();
+                while(index != null) {
+                    if(((Integer) current.getObject()) > ((Integer) index.getObject())) {
+                        temp = current.getObject();
+                        current.setObject(index.getObject());
+                        index.setObject(temp);
+                    }
+                    index = index.getNextNode();
+                }
+                current = current.getNextNode();
+            }
+        }
+    }
 }

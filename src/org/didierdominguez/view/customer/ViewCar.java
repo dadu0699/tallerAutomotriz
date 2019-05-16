@@ -1,10 +1,10 @@
 package org.didierdominguez.view.customer;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,13 +14,20 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.didierdominguez.Main;
 import org.didierdominguez.bean.Car;
 import org.didierdominguez.bean.Customer;
+import org.didierdominguez.bean.Service;
 import org.didierdominguez.controller.ControllerCar;
+import org.didierdominguez.controller.ControllerOrder;
+import org.didierdominguez.controller.ControllerService;
 import org.didierdominguez.list.CircularSimpleList.CircularSimpleNode;
+import org.didierdominguez.list.SimpleList.SimpleNode;
 import org.didierdominguez.util.Alert;
 import org.didierdominguez.util.FileControl;
 import org.didierdominguez.util.ScreenSize;
@@ -85,7 +92,7 @@ public class ViewCar extends Stage {
 
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(20));
-        gridPane.setMaxWidth(x / 2);
+        gridPane.setMaxWidth(Main.getStage().getWidth() / 2);
         gridPane.setPrefSize(x, y);
         // gridPane.setGridLinesVisible(true);
         hBox.setPrefSize(x, y);
@@ -211,7 +218,8 @@ class CreateCar {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        imageView.setFitWidth(x/2);
+
+        imageView.setFitWidth(Main.getStage().getWidth()/2);
         imageView.setPreserveRatio(true);
         imageView.setOnMouseClicked(event -> {
             FileControl.getInstance().uploadImage("carImage", "*.jpg");
@@ -330,7 +338,7 @@ class UpdateCar {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        imageView.setFitWidth(x/2);
+        imageView.setFitWidth(Main.getStage().getWidth()/2);
         imageView.setPreserveRatio(true);
         imageView.setOnMouseClicked(event -> {
             FileControl.getInstance().uploadImage("carImage", "*.jpg");
@@ -412,15 +420,33 @@ class ShowCar {
     private static ShowCar instance;
     private String directory;
     private ImageView imageView;
+    private ObservableList observableListOptions;
+    private JFXButton buttonService;
 
-    private ShowCar() {
-    }
+    private ShowCar() {}
 
     static ShowCar getInstance() {
         if (instance == null) {
             instance = new ShowCar();
         }
         return instance;
+    }
+
+    private void updateObservableListOptions(Car car) {
+        ArrayList<Service> arrayListSparePart = new ArrayList<>();
+        SimpleNode auxiliaryNode = ControllerService.getInstance().getServiceList().getFirstNode();
+        while (auxiliaryNode != null) {
+            Service service = (Service) auxiliaryNode.getObject();
+            if (service.getBrand().equalsIgnoreCase(car.getBrand())
+                    && service.getModel().equalsIgnoreCase(car.getModel())) {
+                arrayListSparePart.add((Service) auxiliaryNode.getObject());
+            }
+            auxiliaryNode = auxiliaryNode.getNextNode();
+        }
+        if (observableListOptions != null) {
+            observableListOptions.clear();
+        }
+        observableListOptions = FXCollections.observableArrayList(arrayListSparePart);
     }
 
     GridPane getGridPane(Car car) {
@@ -434,12 +460,12 @@ class ShowCar {
         gridPane.setVgap(25);
         gridPane.setHgap(5);
         gridPane.setMaxWidth(x / 2);
-        gridPane.setPadding(new Insets(22));
+        gridPane.setPadding(new Insets(20));
         // gridPane.setGridLinesVisible(true);
 
         Text textTitle = new Text("MOSTRAR");
         textTitle.getStyleClass().add("textTitle");
-        textTitle.setFont(new Font(20));
+        textTitle.setFont(new Font(22));
         gridPane.add(textTitle, 0, 0, 2, 1);
 
         File directory = new File(this.directory + car.getPicture());
@@ -454,7 +480,7 @@ class ShowCar {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        imageView.setFitWidth(x/2);
+        imageView.setFitWidth(Main.getStage().getWidth()/2);
         imageView.setPreserveRatio(true);
         gridPane.add(imageView, 0, 1, 2, 1);
         gridPane.setMargin(imageView, new Insets(-10, -5, -25, 0));
@@ -494,13 +520,65 @@ class ShowCar {
         });
         gridPane.add(buttonCopy, 0, 6);
 
-        JFXButton buttonService = new JFXButton("SERVICIO");
+        buttonService = new JFXButton("SERVICIO");
         buttonService.getStyleClass().addAll("customButton", "warningButton");
         buttonService.setButtonType(JFXButton.ButtonType.FLAT);
         buttonService.setPrefSize(x, y / 20);
+        if (ControllerOrder.getInstance().searchOrder(car) != null &&
+                !ControllerOrder.getInstance().searchOrder(car).getState().equalsIgnoreCase("LISTO")) {
+            buttonService.setDisable(true);
+        }
+        buttonService.setOnAction(event -> showAlertProduct(gridPane, "SERVICIOS", car));
         gridPane.add(buttonService, 1, 6);
 
         return gridPane;
+    }
+
+    public void showAlertProduct(GridPane gridPane, String title, Car car) {
+        JFXAlert<String> alert = new JFXAlert<>((Stage) gridPane.getScene().getWindow());
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.setOverlayClose(false);
+
+        double x = ScreenSize.getInstance().getX();
+        GridPane gridfields = new GridPane();
+        gridfields.setVgap(25);
+        gridfields.setPadding(new Insets(20));
+
+        updateObservableListOptions(car);
+        JFXComboBox<Service> comboBoxService = new JFXComboBox<>(observableListOptions);
+        comboBoxService.setPromptText("SERVICIO");
+        comboBoxService.setLabelFloat(true);
+        comboBoxService.setPrefWidth(x);
+        gridfields.add(comboBoxService, 0, 0, 2, 1);
+
+        JFXDialogLayout layout = new JFXDialogLayout();
+        layout.setHeading(new Label(title));
+        layout.setBody(new VBox(gridfields));
+
+        JFXButton cancelButton = new JFXButton("Cerrar");
+        cancelButton.setCancelButton(true);
+        cancelButton.getStyleClass().addAll("customButton", "primaryButton");
+        cancelButton.setButtonType(JFXButton.ButtonType.FLAT);
+        cancelButton.setOnAction(closeEvent -> alert.hideWithAnimation());
+
+        JFXButton buttonAdd = new JFXButton("Aceptar");
+        buttonAdd.getStyleClass().addAll("customButton", "primaryButton");
+        buttonAdd.setButtonType(JFXButton.ButtonType.FLAT);
+        buttonAdd.setOnAction(event -> {
+            if (comboBoxService.getSelectionModel().getSelectedItem() == null) {
+                Alert.getInstance().showAlert(gridPane, "ERROR", "NO SE HA SELEECIONADO UN SERVICIO");
+            } else {
+                ControllerOrder.getInstance().createOrder(car, comboBoxService.getSelectionModel().getSelectedItem());
+                buttonService.setDisable(true);
+                alert.hideWithAnimation();
+                Alert.getInstance().showNotification(car.getCustomer().getName(),
+                        "AUTOMOVIL ENVIADO A " + comboBoxService.getSelectionModel().getSelectedItem().getName());
+            }
+        });
+
+        layout.setActions(buttonAdd, cancelButton);
+        alert.setContent(layout);
+        alert.show();
     }
 }
 

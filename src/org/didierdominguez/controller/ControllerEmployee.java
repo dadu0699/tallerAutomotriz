@@ -30,6 +30,7 @@ public class ControllerEmployee {
                 id++;
                 Employee employee = new Employee(id, name.toUpperCase().trim(), user, role.toUpperCase().trim());
                 employeeList.addLastNode(employee);
+                ControllerPriorityQueue.getInstance().removeQueue();
                 System.out.println("Employee added successfully");
             }
         } else {
@@ -49,6 +50,7 @@ public class ControllerEmployee {
                     employee.setName(name);
                     employee.setRole(role);
                     update = true;
+                    ControllerPriorityQueue.getInstance().removeQueue();
                     System.out.println("Employee updated successfully");
                 }
             } else {
