@@ -18,6 +18,7 @@ import org.didierdominguez.controller.ControllerAttentionQueue;
 import org.didierdominguez.controller.ControllerPriorityQueue;
 import org.didierdominguez.controller.ControllerServiceFinished;
 import org.didierdominguez.list.Queue.QueueNode;
+import org.didierdominguez.list.SimpleList.SimpleNode;
 import org.didierdominguez.util.ScreenSize;
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class ViewQueue extends Stage {
 
     private void updateObservableListServiceFinished() {
         ArrayList<Order> arrayListServiceFinished = new ArrayList<>();
-        QueueNode auxiliaryNode = ControllerServiceFinished.getInstance().getServiceFinishedQueue().getfirstNode();
+        SimpleNode auxiliaryNode = ControllerServiceFinished.getInstance().getServiceFinishedList().getFirstNode();
         while (auxiliaryNode != null) {
             arrayListServiceFinished.add((Order) auxiliaryNode.getObject());
             auxiliaryNode = auxiliaryNode.getNextNode();

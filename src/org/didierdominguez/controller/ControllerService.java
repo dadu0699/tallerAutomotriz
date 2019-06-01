@@ -29,7 +29,8 @@ public class ControllerService {
         if (searchService(name, brand, model) == null) {
             id++;
             Stack sparesStack = new Stack();
-            Service service = new Service(id, name.trim().toUpperCase(), brand.trim().toUpperCase(), model.trim().toUpperCase(), sparesStack, laborPrice, laborPrice);
+            Service service = new Service(id, name.trim().toUpperCase(), brand.trim().toUpperCase(), model.trim().toUpperCase(),
+                    sparesStack, laborPrice, laborPrice, 0);
             serviceList.addLastNode(service);
             System.out.println("Service added successfully");
         } else {

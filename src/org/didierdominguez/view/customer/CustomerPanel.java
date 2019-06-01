@@ -75,6 +75,7 @@ public class CustomerPanel {
         buttonInvoice.setOnAction(event -> {
             selectButton(buttonInvoice);
             vBoxPanels.getChildren().clear();
+            vBoxPanels.getChildren().add(ViewInvoice.getInstance().getScrollPane(customer));
         });
 
         JFXButton buttonLogOut = new JFXButton("CERRAR SESIÓN");

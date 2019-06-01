@@ -76,7 +76,7 @@ public class ViewEmployee extends Stage {
         double y = ScreenSize.getInstance().getY();
 
         gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(20, 10, 20, 20));
         // gridPane.setGridLinesVisible(true);
         gridPane.setMinWidth(x / 2);
         gridPane.setPrefSize(x, y);
@@ -209,7 +209,7 @@ class CreateEmployee {
 
         gridPane.setVgap(25);
         gridPane.setHgap(5);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(20, 20, 20, 10));
         // gridPane.setGridLinesVisible(true);
 
         Text textTitle = new Text("AGREGAR");
@@ -303,7 +303,7 @@ class UpdateEmployee {
 
         gridPane.setVgap(25);
         gridPane.setHgap(5);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(20, 20, 20, 10));
         // gridPane.setGridLinesVisible(true);
 
         Text textTitle = new Text("MODIFICAR");
@@ -396,7 +396,7 @@ class ShowEmployee {
 
         gridPane.setVgap(25);
         gridPane.setHgap(5);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setPadding(new Insets(20, 20, 20, 10));
         // gridPane.setGridLinesVisible(true);
 
         Text textTitle = new Text("MOSTRAR");

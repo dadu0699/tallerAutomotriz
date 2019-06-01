@@ -10,13 +10,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.didierdominguez.bean.Customer;
 import org.didierdominguez.bean.SparePart;
-import org.didierdominguez.controller.ControllerCar;
 import org.didierdominguez.controller.ControllerCustomer;
 import org.didierdominguez.controller.ControllerSparePart;
 import org.didierdominguez.list.CircularDoubleList.CircularDoubleNode;
 import org.didierdominguez.list.SimpleList.SimpleNode;
 import org.didierdominguez.util.ReportGenerator;
 import org.didierdominguez.util.ScreenSize;
+
+import java.io.IOException;
 
 public class ViewReport extends Stage {
     private static ViewReport instance;
@@ -106,6 +107,53 @@ public class ViewReport extends Stage {
         buttonMostUsedParts.getStyleClass().addAll("panelButton", "primaryButton");
         buttonMostUsedParts.setPrefSize(x, y);
         buttonMostUsedParts.setButtonType(JFXButton.ButtonType.FLAT);
+        buttonMostUsedParts.setOnAction(event -> {
+            String name = "";
+            String used = "";
+            int count = 0;
+            String content = "<!doctype html><html lang=\"es\"><head><!-- Required meta tags --><meta " +
+                    "charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, " +
+                    "shrink-to-fit=no\"><!-- Bootstrap CSS --><link rel=\"stylesheet\" " +
+                    "href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\">" +
+                    "<link rel=\"stylesheet\" type=\"text/css\" " +
+                    "href=\"https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css\"><title>mostUsedPartsReport</title>" +
+                    "</head><body><div class=\"container\" align=\"center\"><br><h2>TABLA DE REPUESTOS MÁS UTILIZADOS</h2><hr><table id=\"example\" " +
+                    "class=\"display\" style=\"width:100%\"><thead><tr><th>ID</th><th>NOMBRE</th><th>MARCA</th>" +
+                    "<th>MODELO</th><th>STOCK</th><th>PRECIO</th></tr></thead><tbody><tr>";
+
+            SimpleNode auxiliaryNode = ControllerSparePart.getInstance().getSparePartListSortedByUse().getFirstNode();
+            while (auxiliaryNode != null && count < 10) {
+                content += "<td>"+((SparePart) auxiliaryNode.getObject()).getId()+"</td>"
+                        +"<td>"+((SparePart) auxiliaryNode.getObject()).getName()+"</td>"
+                        +"<td>"+((SparePart) auxiliaryNode.getObject()).getBrand()+"</td>"
+                        +"<td>"+((SparePart) auxiliaryNode.getObject()).getModel()+"</td>"
+                        +"<td>"+((SparePart) auxiliaryNode.getObject()).getStock()+"</td>"
+                        +"<td>"+((SparePart) auxiliaryNode.getObject()).getPrice()+"</td></tr>";
+                name += "'"+((SparePart) auxiliaryNode.getObject()).getName() + "',";
+                used += ((SparePart) auxiliaryNode.getObject()).getCount() + ",";
+                auxiliaryNode = auxiliaryNode.getNextNode();
+                count++;
+            }
+            content += "</tbody></table></div><div class=\"container\" align=\"center\"><br><h2>GRÁFICA REPUESTOS MÁS UTILIZADOS" +
+                    "</h2><hr><br><div style=\"width:40%\"><canvas id=\"myChart\" width=\"100\" height=\"100\">" +
+                    "</canvas><br></div></div><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\"></script>" +
+                    "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\"></script>" +
+                    "<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\"></script>" +
+                    "<script src=\"https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js\"></script>" +
+                    "<script src=\"https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js\"></script>" +
+                    "<script>$(document).ready(function () {$('#example').DataTable({\"order\": [[0, \"asc\"]]});});" +
+                    "</script><script>var ctx=document.getElementById('myChart').getContext('2d');var myPieChart=new Chart" +
+                    "(ctx,{type:'bar',data:{labels:["+ name +"],datasets: [{data: ["+ used +"]," +
+                    "backgroundColor:["+colors+"],borderColor:["+colors+"],borderWidth:1}]},options:{responsive:true}});</script></body></html>";
+            ReportGenerator.getInstance().writeFile(content, "mostUsedPartsReport.html");
+
+            String[] titles = { "ID", "NOMBRE", "MARCA", "MODELO", "STOCK", "PRECIO", "USOS"};
+            try {
+                ReportGenerator.getInstance().generatePDFMostUsedParts("mostUsedPartsReport.pdf", "TABLA DE REPUESTOS MÁS UTILIZADOS", titles);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         JFXButton buttonMoreExpensiveParts = new JFXButton("TOP 10, REPUESTOS MÁS CAROS ");
         buttonMoreExpensiveParts.getStyleClass().addAll("panelButton", "primaryButton");
@@ -156,6 +204,8 @@ public class ViewReport extends Stage {
         buttonMostUsedServices.getStyleClass().addAll("panelButton", "primaryButton");
         buttonMostUsedServices.setPrefSize(x, y);
         buttonMostUsedServices.setButtonType(JFXButton.ButtonType.FLAT);
+        buttonMostUsedServices.setOnAction(event -> {
+        });
 
         JFXButton buttonTopCars = new JFXButton("TOP 5, AUTOMÓVILES");
         buttonTopCars.getStyleClass().addAll("panelButton", "primaryButton");

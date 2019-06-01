@@ -7,14 +7,16 @@ public class SparePart {
     private String model;
     private Integer stock;
     private Double price;
+    private Integer count;
 
-    public SparePart(Integer id, String name, String brand, String model, Integer stock, Double price) {
+    public SparePart(Integer id, String name, String brand, String model, Integer stock, Double price, Integer count) {
         this.id = id;
         this.name = name;
         this.brand = brand;
         this.model = model;
         this.stock = stock;
         this.price = price;
+        this.count = count;
     }
 
     public Integer getId() {
@@ -63,6 +65,14 @@ public class SparePart {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     @Override

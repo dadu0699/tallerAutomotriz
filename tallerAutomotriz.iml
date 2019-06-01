@@ -10,5 +10,6 @@
     <orderEntry type="library" name="jfoenix-8.0.8" level="project" />
     <orderEntry type="library" name="iText7-Core-7.1.2" level="project" />
     <orderEntry type="library" name="controlsfx-8.40.14" level="project" />
+    <orderEntry type="library" name="jfreechart-1.0" level="project" />
   </component>
 </module>

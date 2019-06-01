@@ -26,7 +26,7 @@ public class ControllerSparePart {
         if (searchSparePart(name, brand, model) == null) {
             id++;
             SparePart sparePart = new SparePart(id, name.trim().toUpperCase(), brand.trim().toUpperCase(),
-                    model.trim().toUpperCase(), stock, price);
+                    model.trim().toUpperCase(), stock, price, 0);
             sparePartList.addLastNode(sparePart);
             System.out.println("Spare part added successfully");
         } else {
@@ -124,4 +124,26 @@ public class ControllerSparePart {
     }
 
 
+    public SimpleList getSparePartListSortedByUse() {
+        SimpleList sparePartListSorted = sparePartList;
+        SimpleNode current = sparePartListSorted.getFirstNode();
+        SimpleNode index;
+        Object temp;
+
+        if(sparePartListSorted.getFirstNode() != null) {
+            while(current != null) {
+                index = current.getNextNode();
+                while(index != null) {
+                    if(((SparePart) current.getObject()).getCount() < ((SparePart) index.getObject()).getCount()) {
+                        temp = current.getObject();
+                        current.setObject(index.getObject());
+                        index.setObject(temp);
+                    }
+                    index = index.getNextNode();
+                }
+                current = current.getNextNode();
+            }
+        }
+        return sparePartListSorted;
+    }
 }

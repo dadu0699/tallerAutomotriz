@@ -370,3 +370,53 @@
     -fx-border-width: 0 0 2 0;
     -fx-translate-y: 1px;
 }
+
+/****************************************************************
+  Scroll Pane
+****************************************************************/
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-pane>.viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane:focused {
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .corner {
+    -fx-background-insets: 0;
+}
+
+.jfx-scroll-pane .main-header{
+	-fx-background-color: #2D303DFF;
+}
+
+.jfx-scroll-pane .condensed-header{
+	-fx-background-color: #2B2E3AFF;
+}
+
+/****************************************************************
+  card Skin
+****************************************************************/
+.customCard {
+    -fx-font-family: "Segoe UI Light";
+    -fx-background-color: #282A36FF;
+    -fx-effect: dropshadow(three-pass-box, #161616, 10, 0, 0, 0);
+    -fx-text-fill: #f8f9fa;
+}
+.customCard > .jfx-layout-heading {
+    -fx-alignment: center-left;
+    -fx-font-weight: BOLD;
+    -fx-padding: 10 20 10 20;
+    -fx-background-color: #2D303DFF;
+}
+.customCard > .jfx-layout-body {
+    -fx-alignment: center-left;
+    -fx-padding: 10 20 0 20;
+    -fx-pref-width: 400;
+}

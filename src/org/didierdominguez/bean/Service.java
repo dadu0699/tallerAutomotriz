@@ -10,8 +10,10 @@ public class Service {
     private Stack spares;
     private Double laborPrice;
     private Double total;
+    private Integer count;
 
-    public Service(Integer id, String name, String brand, String model, Stack spares, Double laborPrice, Double total) {
+    public Service(Integer id, String name, String brand, String model, Stack spares, Double laborPrice, Double total,
+                   Integer count) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -19,6 +21,7 @@ public class Service {
         this.spares = spares;
         this.laborPrice = laborPrice;
         this.total = total;
+        this.count = count;
     }
 
     public Integer getId() {
@@ -75,6 +78,14 @@ public class Service {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     @Override

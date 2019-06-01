@@ -1,15 +1,17 @@
 package org.didierdominguez.controller;
 
 import org.didierdominguez.bean.Order;
-import org.didierdominguez.list.Queue.Queue;
-import org.didierdominguez.list.Queue.QueueNode;
+import org.didierdominguez.bean.SparePart;
+import org.didierdominguez.list.SimpleList.SimpleList;
+import org.didierdominguez.list.SimpleList.SimpleNode;
+import org.didierdominguez.list.Stack.StackNode;
 
 public class ControllerServiceFinished {
     private static ControllerServiceFinished instance;
-    private Queue serviceFinishedQueue;
+    private SimpleList serviceFinishedList;
 
     private ControllerServiceFinished() {
-        serviceFinishedQueue = new Queue();
+        serviceFinishedList = new SimpleList();
     }
 
     public static ControllerServiceFinished getInstance() {
@@ -19,19 +21,30 @@ public class ControllerServiceFinished {
         return instance;
     }
 
-    public void addQueue(Order order) {
+    public void addList(Order order) {
         ControllerOrder.getInstance().updateOrder(order.getId(), "LISTO");
         updateCustomer(order);
-        serviceFinishedQueue.push(order);
+        order.getService().setCount(order.getService().getCount() + 1);
+        StackNode auxiliaryNode = (StackNode) order.getService().getSpares().getTop();
+        while (auxiliaryNode != null) {
+            ((SparePart) auxiliaryNode.getObject()).setCount(((SparePart) auxiliaryNode.getObject()).getCount() + 1);
+            ((SparePart) auxiliaryNode.getObject()).setStock(((SparePart) auxiliaryNode.getObject()).getStock() - 1);
+            auxiliaryNode = auxiliaryNode.getNextNode();
+        }
+        serviceFinishedList.addLastNode(order);
     }
 
-    public Queue getServiceFinishedQueue() {
-        return serviceFinishedQueue;
+    public SimpleList getServiceFinishedList() {
+        return serviceFinishedList;
+    }
+
+    public void deleteFinishedList(Order order) {
+        serviceFinishedList.deleteSpecificNode(order);
     }
 
     public void updateCustomer(Order order) {
         int count = 1;
-        QueueNode auxiliaryNode = serviceFinishedQueue.getfirstNode();
+        SimpleNode auxiliaryNode = serviceFinishedList.getFirstNode();
         while (auxiliaryNode != null) {
             if (((Order) auxiliaryNode.getObject()).getCustomer() == order.getCustomer()) {
                 count++;

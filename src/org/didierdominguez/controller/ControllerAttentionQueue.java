@@ -25,7 +25,8 @@ public class ControllerAttentionQueue {
 
     public void removeQueue() {
         if (attentionQueue.getfirstNode() != null) {
-            ControllerServiceFinished.getInstance().addQueue((Order) attentionQueue.getfirstNode().getObject());
+            ControllerServiceFinished.getInstance().addList((Order) attentionQueue.getfirstNode().getObject());
+            ControllerInvoice.getInstance().createInvoice((Order) attentionQueue.getfirstNode().getObject());
             attentionQueue.pop();
             ControllerPriorityQueue.getInstance().removeQueue();
         }

@@ -1,6 +1,5 @@
 package org.didierdominguez.view.customer;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -18,6 +17,7 @@ import org.didierdominguez.controller.ControllerAttentionQueue;
 import org.didierdominguez.controller.ControllerPriorityQueue;
 import org.didierdominguez.controller.ControllerServiceFinished;
 import org.didierdominguez.list.Queue.QueueNode;
+import org.didierdominguez.list.SimpleList.SimpleNode;
 import org.didierdominguez.util.ScreenSize;
 
 import java.util.ArrayList;
@@ -74,7 +74,7 @@ public class ViewAutomobileProgress extends Stage {
 
     private void updateObservableListServiceFinished() {
         ArrayList<Order> arrayListServiceFinished = new ArrayList<>();
-        QueueNode auxiliaryNode = ControllerServiceFinished.getInstance().getServiceFinishedQueue().getfirstNode();
+        SimpleNode auxiliaryNode = ControllerServiceFinished.getInstance().getServiceFinishedList().getFirstNode();
         while (auxiliaryNode != null) {
             if (((Order) auxiliaryNode.getObject()).getCustomer() == customer) {
                 arrayListServiceFinished.add((Order) auxiliaryNode.getObject());
