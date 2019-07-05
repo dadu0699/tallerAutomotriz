@@ -112,7 +112,7 @@ public class CustomerPanel {
         root.getChildren().clear();
 
         stage.hide();
-        stage.setWidth(1280);
+        stage.setWidth(ScreenSize.getInstance().getX());
         stage.setHeight(720);
         stage.centerOnScreen();
         stage.setMaximized(true);

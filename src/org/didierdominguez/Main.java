@@ -33,7 +33,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        ControllerEmployee.getInstance().createEmployee("ADMINISTRADOR", "ADMINISTRADOR", "ADMIN", "admin", true);
+        ControllerEmployee.getInstance().createEmployee("ADMINISTRADOR", "ADMINISTRADOR", "ADMIN",
+                "admin", true);
         launch(args);
     }
 

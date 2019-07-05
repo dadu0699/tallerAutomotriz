@@ -219,8 +219,6 @@ class CreateCar {
             e.printStackTrace();
         }
 
-        imageView.setFitWidth(Main.getStage().getWidth()/2);
-        imageView.setPreserveRatio(true);
         imageView.setOnMouseClicked(event -> {
             FileControl.getInstance().uploadImage("carImage", "*.jpg");
             if (FileControl.getInstance().getFileControlImage() != null) {
@@ -235,6 +233,8 @@ class CreateCar {
             }
         });
         imageView.getStyleClass().addAll("uploadImageView");
+        imageView.setFitWidth(Main.getStage().getWidth()/2);
+        imageView.setPreserveRatio(true);
         gridPane.add(imageView, 0, 1, 2, 1);
         gridPane.setMargin(imageView, new Insets(-10, -5, -25, 0));
 
