@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.didierdominguez.controller.ControllerCustomer;
 import org.didierdominguez.controller.ControllerEmployee;
 import org.didierdominguez.view.login.Login;
 

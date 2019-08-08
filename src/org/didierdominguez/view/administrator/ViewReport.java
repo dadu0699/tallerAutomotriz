@@ -17,8 +17,6 @@ import org.didierdominguez.list.SimpleList.SimpleNode;
 import org.didierdominguez.util.ReportGenerator;
 import org.didierdominguez.util.ScreenSize;
 
-import java.io.IOException;
-
 public class ViewReport extends Stage {
     private static ViewReport instance;
     private String colors;
