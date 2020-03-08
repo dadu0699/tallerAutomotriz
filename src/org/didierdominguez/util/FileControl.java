@@ -58,7 +58,7 @@ public class FileControl {
 
     public void uploadImage(String description, String extension) {
         fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new java.io.File(directory + "/src/org/didierdominguez/assets/images/"));
+        fileChooser.setInitialDirectory(new File(directory + "/src/org/didierdominguez/assets/images/"));
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(description, extension));
 
         fileControlImage = fileChooser.showOpenDialog(null);
