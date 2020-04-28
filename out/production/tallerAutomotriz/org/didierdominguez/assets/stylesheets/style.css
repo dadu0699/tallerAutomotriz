@@ -40,6 +40,16 @@
     -jfx-focus-color: #E91E63;
 }
 
+.jfx-password-field > .input-line,
+ .jfx-text-field > .input-line{
+    -fx-background-color: #9E9BA3;
+}
+
+.jfx-password-field,
+.jfx-text-field {
+    -fx-prompt-text-fill: #9E9BA3;
+}
+
 /****************************************************************
   Button Skin
 ****************************************************************/
