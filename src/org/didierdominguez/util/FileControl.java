@@ -29,7 +29,14 @@ public class FileControl {
 
     public void uploadFile(String description, String extension) {
         fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new java.io.File(directory + "/fileUpload"));
+
+
+        File directory = new File(this.directory+ "/fileUpload");
+        if (!directory.exists()) {
+            directory = new File(this.directory);
+        }
+
+        fileChooser.setInitialDirectory(directory);
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(description, extension));
 
         fileControl = fileChooser.showOpenDialog(null);
